@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style type="text/css">
+html, body {
+    width: 100%;
+    height: 100%;
+}
+body {
+    font-family: sans-serif;
+    font-size: 0.8em;
+}
+#mapEl {
+    position: relative;
+    width: 100%;
+    height: 300px;
+}
+svg.mapmap .geometry path {
+    display: none;
+}
+svg.mapmap .geometry path.selected {
+    display: block;
+}
+</style>
+</head>
+<body>
+
+<svg id="mapEl" width="800" height="400"></svg>
+<small>Map data &copy; OpenStreetMap &amp; Contributors, Data &copy; Arbeitsmarktservice Österreich</small>
+
+<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+<script src="http://d3js.org/d3.v3.js"></script>
+<script src="data.js"></script>
+<script src="../lib/mapmap.js"></script>
+<script>
+var map = mapmap('mapEl')
+	.geometry(napoleon.cities)
+	.geometry(napoleon.army)
+	.hoverInfo(['name','size']);
+</script>
+</body>
