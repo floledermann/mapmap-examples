@@ -17,10 +17,6 @@ body {
     height: 300px;
 }
 svg.mapmap .geometry path {
-    display: none;
-}
-svg.mapmap .geometry path.selected {
-    display: block;
 }
 </style>
 </head>
@@ -35,8 +31,62 @@ svg.mapmap .geometry path.selected {
 <script src="../lib/mapmap.js"></script>
 <script>
 var map = mapmap('mapEl')
-	.geometry(napoleon.cities)
-	.geometry(napoleon.army)
-	.hoverInfo(['name','size']);
+	.geometry(napoleon.cities, geoPoint('lat','lon'))
+	.hoverInfo('name')
+	.geometry(napoleon.army, dd.map.key('group'), geoPairs)
+	.hoverInfo('size')
+    .symbolize(lineWidth)
+    //.applyBehaviour(mapmap.interactions.zoom())
+;
+
+function lineWidth(el, geom) {
+    if (geom.properties.size) {
+        el.attr({
+            'stroke-width': geom.properties.size / 10000,
+            'stroke-linecap': 'round'
+        });
+    }
+    var colors = ['#000000','#ff0000','#00ff00'];
+    if (geom.properties.group) {
+        el.attr('stroke', colors[geom.properties.group - 1]);
+    }
+}
+
+function geoPoint(latProp, lonProp, keyProp) {
+    var id = 0;
+    return function(d, emit) {
+        var key = keyProp ? d[keyProp] : id++;
+        emit(key, {
+            type: 'Feature',
+            geometry: {
+                type: 'Point',
+                coordinates: [d[lonProp], d[latProp]]
+            },
+            properties: d
+        })
+    }
+}
+
+function geoLine(coordinates, properties) {
+    return {
+        type: 'Feature',
+        geometry: {
+            type: 'LineString',
+            coordinates: coordinates
+        },
+        properties: properties
+    }
+}
+
+function geoPairs(key, data, emit) {
+    var prev = null, cur = null;
+    for (var i=0; i<data.length; i++) {
+        cur = data[i];
+        if (prev) {
+            emit(key + '-' + i, geoLine([[prev.lon,prev.lat],[cur.lon,cur.lat]], prev));
+        }
+        prev = cur;
+    }
+}
 </script>
 </body>
