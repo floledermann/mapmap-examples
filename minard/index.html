@@ -33,7 +33,7 @@ svg.mapmap .geometry path {
 var map = mapmap('mapEl')
 	.geometry(napoleon.cities, geoPoint('lat','lon'))
 	.hoverInfo('name')
-	.geometry(napoleon.army, dd.map.key('group'), geoPairs)
+	.geometry(napoleon.army, dd.map.key('group'), geoSegments)
 	.hoverInfo('size')
     .symbolize(lineWidth)
     //.applyBehaviour(mapmap.interactions.zoom())
@@ -78,7 +78,7 @@ function geoLine(coordinates, properties) {
     }
 }
 
-function geoPairs(key, data, emit) {
+function geoSegments(key, data, emit) {
     var prev = null, cur = null;
     for (var i=0; i<data.length; i++) {
         cur = data[i];
