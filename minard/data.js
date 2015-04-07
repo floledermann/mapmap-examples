@@ -77,7 +77,7 @@ napoleon.army = [
     {lon:25.0,  lat:54.4,  size:8000,   dir:-1, group:1},
     {lon:24.4,  lat:54.4,  size:4000,   dir:-1, group:1},
     {lon:24.2,  lat:54.4,  size:4000,   dir:-1, group:1},
-    {lon:24.1,  lat:54.4,  size:4000,   dir:-1, group:1},
+    {lon:24.1,  lat:54.3,  size:4000,   dir:-1, group:1},
     /* Group 2 */
     {lon:24.0,  lat:55.1,  size:60000,  dir:1,  group:2},
     {lon:24.5,  lat:55.2,  size:60000,  dir:1,  group:2},
@@ -93,5 +93,5 @@ napoleon.army = [
     {lon:24.6,  lat:55.8,  size:6000,   dir:1,  group:3},
     {lon:24.6,  lat:55.8,  size:6000,   dir:-1, group:3},
     {lon:24.2,  lat:54.4,  size:6000,   dir:-1, group:3},
-    {lon:24.1,  lat:54.4,  size:6000,   dir:-1, group:3}
+    {lon:24.1,  lat:54.3,  size:6000,   dir:-1, group:3}
 ];
