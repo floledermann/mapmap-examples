@@ -31,13 +31,35 @@ svg.mapmap .geometry path {
 <script src="../lib/mapmap.js"></script>
 <script>
 var map = mapmap('mapEl')
-	.geometry(napoleon.cities, geoPoint('lat','lon'))
-	.hoverInfo('name')
-	.geometry(napoleon.army, dd.map.key('group'), geoSegments)
-	.hoverInfo('size')
-    .symbolize(lineWidth)
+    //.projection(foo)
+    // layer 1: CITIES
+    .geometry(napoleon.cities, dd.map.geo.point('lat','lon'))
+    .hoverInfo('name')
+    // layer 2: ARMY MOVEMENT
+    .geometry(napoleon.army, dd.map.key('group'), dd.emit.geo.segments())
+    .hoverInfo('size')
+    .attr(lineWidth) // assign visual attributes (svg attributes) / possibly depending on viewing context (e.g. highlight)
+    //.repr() // create geomtry (default: d3 path/svg from geojson)
+    // TODO: repr() depending on viewing context (e.g. scale)
+    // e.g. split wien
+    // anchor "projects" any data to a point on the map
+    //.anchor(lonAnchors)
     //.applyBehaviour(mapmap.interactions.zoom())
 ;
+
+function lonAchors(obj) {
+    if (obj.lon) {
+        for (var i=napoleon.army.length - 1; i>=0; i--) {
+            var place = napoleon.army[i];
+            if (place.lon == obj.lon) {
+                // TODO: what to return? SVG Point? offset from root element?
+                // what to do in case of animation?
+                return map.project(place);
+            }
+        }
+    }
+    return null;
+}
 
 function lineWidth(el, geom) {
     if (geom.properties.size) {
@@ -52,41 +74,6 @@ function lineWidth(el, geom) {
     }
 }
 
-function geoPoint(latProp, lonProp, keyProp) {
-    var id = 0;
-    return function(d, emit) {
-        var key = keyProp ? d[keyProp] : id++;
-        emit(key, {
-            type: 'Feature',
-            geometry: {
-                type: 'Point',
-                coordinates: [d[lonProp], d[latProp]]
-            },
-            properties: d
-        })
-    }
-}
 
-function geoLine(coordinates, properties) {
-    return {
-        type: 'Feature',
-        geometry: {
-            type: 'LineString',
-            coordinates: coordinates
-        },
-        properties: properties
-    }
-}
-
-function geoSegments(key, data, emit) {
-    var prev = null, cur = null;
-    for (var i=0; i<data.length; i++) {
-        cur = data[i];
-        if (prev) {
-            emit(key + '-' + i, geoLine([[prev.lon,prev.lat],[cur.lon,cur.lat]], prev));
-        }
-        prev = cur;
-    }
-}
 </script>
 </body>
