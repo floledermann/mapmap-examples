@@ -25,9 +25,9 @@ napoleon.cities =
     ]
 
 napoleon.temp = [
-    {lon:37.6, temp:0,   date:"18 Oct 1812"},
-    {lon:36.0, temp:0,   date:"24 Oct 1812"},
-    {lon:33.2, temp:-9,  date:"09 Nov 1812"},
+    {lon:37.65, temp:0,   date:"18 Oct 1812"},
+    {lon:36.8, temp:0,   date:"24 Oct 1812"},
+    {lon:34.3, temp:-9,  date:"09 Nov 1812"},
     {lon:32.0, temp:-21, date:"14 Nov 1812"},
     {lon:29.2, temp:-11, date:"24 Nov 1812"},
     {lon:28.5, temp:-20, date:"28 Nov 1812"},
@@ -72,12 +72,12 @@ napoleon.army = [
     {lon:29.13, lat:54.29, size:50000,  dir:-1, group:1}, /* joined by group 2 */
     {lon:28.5,  lat:54.2,  size:50000,  dir:-1, group:1},
     {lon:28.3,  lat:54.3,  size:28000,  dir:-1, group:1},
-    {lon:26.8,  lat:54.3,  size:12000,  dir:-1, group:1},
-    {lon:26.8,  lat:54.4,  size:14000,  dir:-1, group:1},
-    {lon:25.0,  lat:54.4,  size:8000,   dir:-1, group:1},
+    {lon:27.2,  lat:54.3,  size:12000,  dir:-1, group:1},
+    {lon:26.7,  lat:54.4,  size:14000,  dir:-1, group:1},
+    {lon:25.3,  lat:54.4,  size:8000,   dir:-1, group:1},
     {lon:24.4,  lat:54.4,  size:4000,   dir:-1, group:1},
     {lon:24.2,  lat:54.4,  size:4000,   dir:-1, group:1},
-    {lon:24.1,  lat:54.3,  size:4000,   dir:-1, group:1},
+    {lon:24.1,  lat:54.4,  size:10000,   dir:-1, group:1},
     /* Group 2 */
     {lon:24.0,  lat:55.1,  size:60000,  dir:1,  group:2},
     {lon:24.5,  lat:55.2,  size:60000,  dir:1,  group:2},
@@ -92,6 +92,5 @@ napoleon.army = [
     {lon:24.5,  lat:55.3,  size:22000,  dir:1,  group:3},
     {lon:24.6,  lat:55.8,  size:6000,   dir:1,  group:3},
     {lon:24.6,  lat:55.8,  size:6000,   dir:-1, group:3},
-    {lon:24.2,  lat:54.4,  size:6000,   dir:-1, group:3},
-    {lon:24.1,  lat:54.3,  size:6000,   dir:-1, group:3}
+    {lon:24.2,  lat:54.4,  size:6000,   dir:-1, group:3}
 ];
