@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <style type="text/css">
-html, body {
+html {
     width: 100%;
     height: 100%;
 }
@@ -15,24 +15,33 @@ body {
     position: relative;
     width: 100%;
     height: 300px;
+    border-bottom: 2px solid #999;
+}
+#mapEl .layer-2 path {
+    fill: #666;
+    fill-opacity: 0.1;
 }
 #chartEl {
     position: relative;
     width: 100%;
-    height: 200px;
+    xheight: 200px;
 }
 #chartEl path {
     fill: none;
-    stroke: #f00;
-    stroke-width: 2px;
-    stroke-linecap: round;
+    stroke: #333;
+    stroke-width: 0.8;
+}
+svg line.anchor {
+    fill: none;
+    stroke: #333;
+    stroke-width: 0.3;
 }
 </style>
 </head>
 <body>
 
 <svg id="mapEl" width="800" height="400"></svg>
-<svg id="chartEl" width="800" height="200"></svg>
+<svg id="chartEl" width="800" height="200" viewBox="0 0 800 200" preserveAspectRatio="xMidYMin slice"></svg>
 <small>Map data taken from <a href="http://benschmidt.org/D3-trail/minard.html">Ben Schmidt</a></small>
 
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -40,11 +49,19 @@ body {
 <script src="data.js"></script>
 <script src="../lib/mapmap.js"></script>
 <script>
+/*
+TO DO:
+- implement attr() to assign visual attributes (choropleth is then a wrapper for color attr)
+
+- select last defined layer by default
+- implement repr() to create geometric representation
+
+- add viewing context to functions for view-dependent representations
+- 
+*/
+
 var map = mapmap('mapEl')
     //.projection(foo)
-    // layer 1: CITIES
-    .geometry(napoleon.cities, dd.map.geo.point('lat','lon'))
-    .hoverInfo('name')
     // layer 2: ARMY MOVEMENT
     .geometry(napoleon.army, dd.map.key('group'), dd.emit.geo.segments())
     .hoverInfo('size')
@@ -54,6 +71,9 @@ var map = mapmap('mapEl')
     // e.g. split wien
     // anchor "projects" any data to a point on the map
     .anchorFunction(lonAnchors)
+    // layer 1: CITIES
+    .geometry(napoleon.cities, dd.map.geo.point('lat','lon'))
+    .hoverInfo('name')
     //.applyBehaviour(mapmap.interactions.zoom())
 ;
 
@@ -66,7 +86,7 @@ function lonAnchors(obj) {
             if (place.lon == obj.lon) {
                 // TODO: what to return? SVG Point? offset from root element?
                 // what to do in case of animation?
-                return this.project([place.lat, place.lon]);
+                return this.project([place.lon, place.lat]);
             }
         }
     }
@@ -80,9 +100,10 @@ function lineWidth(el, geom) {
             'stroke-linecap': 'round'
         });
     }
-    var colors = ['#000000','#ff0000','#00ff00'];
+    //var colors = ['#000000','#ff0000','#00ff00'];
     if (geom.properties.group) {
-        el.attr('stroke', colors[geom.properties.group - 1]);
+        //el.attr('stroke', colors[geom.properties.group - 1]);
+        el.attr('stroke', geom.properties.dir == 1 ? '#e5cbab' : '#000000');
     }
 }
 
@@ -90,12 +111,12 @@ function createChart(el, data, map) {
     el = d3.select('#' + el);
     
     var width = 800,
-        height = 200;
+        height = 100;
     
     //var x = d3.scale.linear().range([0, width]);
 
     var y = d3.scale.linear()
-        .range([height, 0]);
+        .range([height, 10]);
 
     //var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
@@ -116,6 +137,31 @@ function createChart(el, data, map) {
         .datum(data)
         .attr('class', 'temp')
         .attr('d', path);
+    
+    el.selectAll('line.anchor')
+        .data(data)
+        .enter()
+        .append('line')
+        .attr({
+            'class': 'anchor',
+            x1:function(d){return map.anchor(d)[0]},
+            y1:function(d){ return y(d.temp); },
+            x2:function(d){return map.anchor(d)[0]},
+            y2:0
+        });
+    
+    d3.select('#mapEl g.fixed')
+        .selectAll('line.anchor')
+        .data(data)
+        .enter()
+        .append('line')
+        .attr({
+            'class': 'anchor',
+            x1:function(d){return map.anchor(d)[0]},
+            y1:function(d){ return map.anchor(d)[1]; },
+            x2:function(d){return map.anchor(d)[0]},
+            y2:400
+        });    
 }
 
 </script>
