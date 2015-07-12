@@ -1,0 +1,30 @@
+{
+  "name": "mapmap-examples",
+  "version": "0.1.0",
+  "description": "A collection of examples for using the mapmap.js library",
+  "main": "index.js",
+  "author": "Florian Ledermann",
+  "license": "AGPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/floledermann/mapmap-examples.git"
+  },
+  "scripts": {
+    "build": "cd node_modules/mapmap && browserify src/index.js -s mapmap -o ../../lib/mapmap.js",
+    "watch": "cd node_modules/mapmap && watchify src/index.js -s mapmap --debug --verbose -p [ sourcemapify --base ../../lib ] -o ../../lib/mapmap.js"
+  },
+  "dependencies": {
+    "mapmap": "0.2.0"
+  },
+  "devDependencies": {
+    "browserify": "^10.2.4",
+    "sourcemapify": "^1.0.0",
+    "uglify-js": "^2.4.23",
+    "watchify": "^3.2.3"
+  },
+  "browserify": {
+    "transform": [
+      "browserify-versionify"
+    ]
+  }
+}
