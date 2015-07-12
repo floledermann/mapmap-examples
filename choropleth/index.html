@@ -3,31 +3,58 @@
 <head>
 <meta charset="utf-8">
 <style type="text/css">
-html, body {
-    width: 100%;
-    height: 100%;
+html {
+    margin: 0;
+    padding: 0;
 }
 body {
+    width: auto;
+    height: auto;
     font-family: sans-serif;
-    font-size: 0.8em;
+    font-size: 12px;
+    margin: 0;
+    padding: 10px;
+}
+h3 {
+    margin: 0 0 1em;
 }
 #mapEl {
     position: relative;
     width: 100%;
     height: 300px;
 }
-svg.mapmap .geometry path {
+
+.mapLegend {
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    left: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: rgba(255,255,255,0.9);
+}
+
+.map-wrapper {
+    position: relative;
+}
+
+svg.mapmap .gemeinden path {
     display: none;
 }
-svg.mapmap .geometry path.selected {
-    display: block;
+
+@media (max-width: 760px) {
+    .mapLegend {
+        position: static;
+    }
 }
 </style>
 </head>
 <body>
 
+<div class="map-wrapper"><!-- for positioning hoverInfo, the map needs to be wrapped in an element with position:relative -->
 <svg id="mapEl" width="800" height="400"></svg>
-<small>Map data &copy; OpenStreetMap &amp; Contributors, Data &copy; Arbeitsmarktservice Österreich</small>
+</div>
+<small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
 
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
 <script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
@@ -35,27 +62,35 @@ svg.mapmap .geometry path.selected {
 <script src="../lib/colorbrewer.js" charset="utf-8"></script>
 <script src="../lib/mapmap.js"></script>
 <script>
-var map = mapmap('mapEl')
-	.geometry('../data/austria.topojson', 'iso') // use the "iso" attribute as primary key
-	.data('unemployment_AT_2014.csv', 'id')  // use the field "id" to map data to geometries' keys
-	.meta({
-		'unemployed':  {
-            label: "Unemployment Rate",
-            domain: [0,0.15],
+var map = mapmap('#mapEl')
+    //.projection(d3.geo.conicConformal())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({
+        'population':  {
+            label: "District Population",
+            valueLabel: "Population",
+            domain: [0,200000],
             colors: colorbrewer.YlOrRd[5],
-            numberFormat:'%',
+            numberFormat:'0,000'
         }
-	})
-    .select('bezirke')
-	.choropleth('unemployed')
-	.hoverInfo(['name','unemployed'])
-	.applyBehaviour(mapmap.interactions.zoom())
-    .legend(mapmap.legend.html());
+    })
+    .select(isLowerAustria)
+    .extent()
+    .highlight()
+    .choropleth('population')
+    .hoverInfo(['name','population'])
+    .applyBehaviour(mapmap.interactions.zoom())
+    .legend(mapmap.legend.html())
+;
+
+function isLowerAustria(d) {
+    return d.iso && d.iso.length == 3 && d.iso[0] == '3';
+}
 </script>
 <!--
 TO DO:
 - warn for missing topojson lib
-- width, height !!! - what if attributes in svg element are not present?
 - create svg if not main element
 -->
 </body>

@@ -36,6 +36,8 @@ svg line.anchor {
     stroke: #333;
     stroke-width: 0.3;
 }
+
+
 </style>
 </head>
 <body>
@@ -52,29 +54,24 @@ svg line.anchor {
 /*
 TO DO:
 - implement attr() to assign visual attributes (choropleth is then a wrapper for color attr)
-
-- select last defined layer by default
-- implement repr() to create geometric representation
-
-- add viewing context to functions for view-dependent representations
-- 
 */
+var dd = mapmap.datadata;
 
-var map = mapmap('mapEl')
-    //.projection(foo)
-    // layer 2: ARMY MOVEMENT
-    .geometry(napoleon.army, dd.map.key('group'), dd.emit.geo.segments())
+var map = mapmap('#mapEl')
+    // layer 1: ARMY MOVEMENT
+    .geometry(napoleon.army, {
+        map: dd.map.key('group'),
+        reduce: dd.emit.geo.segments()
+    })
     .hoverInfo('size')
-    .attr(lineWidth) // assign visual attributes (svg attributes) / possibly depending on viewing context (e.g. highlight)
-    //.repr() // create geomtry (default: d3 path/svg from geojson)
-    // TODO: repr() depending on viewing context (e.g. scale)
-    // e.g. split wien
+    .symbolize(lineWidth) // assign visual attributes (svg attributes) / possibly depending on viewing context (e.g. highlight)
     // anchor "projects" any data to a point on the map
     .anchorFunction(lonAnchors)
-    // layer 1: CITIES
-    .geometry(napoleon.cities, dd.map.geo.point('lat','lon'))
-    .hoverInfo('name')
-    //.applyBehaviour(mapmap.interactions.zoom())
+    // layer 2: CITIES
+    .geometry(napoleon.cities, {
+        map: dd.map.geo.point('lat','lon')
+    })
+    .labeled_points('name')
 ;
 
 createChart('chartEl', napoleon.temp, map);
