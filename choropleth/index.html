@@ -80,7 +80,7 @@ var map = mapmap('#mapEl')
     .highlight()
     .choropleth('population')
     .hoverInfo(['name','population'])
-    .applyBehaviour(mapmap.interactions.zoom())
+    .applyBehaviour(mapmap.behavior.zoom())
     .legend(mapmap.legend.html())
 ;
 

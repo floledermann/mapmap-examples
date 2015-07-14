@@ -24,7 +24,6 @@ body {
 #chartEl {
     position: relative;
     width: 100%;
-    xheight: 200px;
 }
 #chartEl path {
     fill: none;
@@ -51,10 +50,6 @@ svg line.anchor {
 <script src="data.js"></script>
 <script src="../lib/mapmap.js"></script>
 <script>
-/*
-TO DO:
-- implement attr() to assign visual attributes (choropleth is then a wrapper for color attr)
-*/
 var dd = mapmap.datadata;
 
 var map = mapmap('#mapEl')
@@ -64,14 +59,14 @@ var map = mapmap('#mapEl')
         reduce: dd.emit.geo.segments()
     })
     .hoverInfo('size')
-    .symbolize(lineWidth) // assign visual attributes (svg attributes) / possibly depending on viewing context (e.g. highlight)
-    // anchor "projects" any data to a point on the map
+    .symbolize(lineWidth) // assign visual attributes (svg attributes) / TODO: possibly depending on viewing context (e.g. highlight)
+    // The anchorFunction "projects" any data to a point on the map
     .anchorFunction(lonAnchors)
     // layer 2: CITIES
     .geometry(napoleon.cities, {
         map: dd.map.geo.point('lat','lon')
     })
-    .labeled_points('name')
+    .symbolize(mapmap.symbolize.addLabel('name'))
 ;
 
 createChart('chartEl', napoleon.temp, map);
@@ -81,8 +76,6 @@ function lonAnchors(obj) {
         for (var i=napoleon.army.length - 1; i>=0; i--) {
             var place = napoleon.army[i];
             if (place.lon == obj.lon) {
-                // TODO: what to return? SVG Point? offset from root element?
-                // what to do in case of animation?
                 return this.project([place.lon, place.lat]);
             }
         }
@@ -97,31 +90,25 @@ function lineWidth(el, geom) {
             'stroke-linecap': 'round'
         });
     }
-    //var colors = ['#000000','#ff0000','#00ff00'];
     if (geom.properties.group) {
-        //el.attr('stroke', colors[geom.properties.group - 1]);
         el.attr('stroke', geom.properties.dir == 1 ? '#e5cbab' : '#000000');
     }
 }
 
 function createChart(el, data, map) {
-    el = d3.select('#' + el);
-    
+
     var width = 800,
         height = 100;
-    
-    //var x = d3.scale.linear().range([0, width]);
 
     var y = d3.scale.linear()
         .range([height, 10]);
-
-    //var xAxis = d3.svg.axis().scale(x).orient("bottom");
 
     var yAxis = d3.svg.axis()
         .scale(y)
         .orient("left");
         
-    //x.domain(d3.extent(data, function(d) { return d.lon; }));
+    el = d3.select('#' + el);
+           
     y.domain(d3.extent(data, function(d) { return d.temp; }));
       
     var path = d3.svg.line()
