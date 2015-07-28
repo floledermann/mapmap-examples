@@ -10,8 +10,8 @@
     "url": "https://github.com/floledermann/mapmap-examples.git"
   },
   "scripts": {
-    "build": "cd node_modules/mapmap && browserify src/index.js -s mapmap -o ../../lib/mapmap.js",
-    "watch": "cd node_modules/mapmap && watchify src/index.js -s mapmap --debug --verbose -p [ sourcemapify --base ../../lib ] -o ../../lib/mapmap.js"
+    "build": "cd node_modules/mapmap && browserify src/index.js -s mapmap --ignore d3-dsv -o ../../lib/mapmap.js",
+    "watch": "cd node_modules/mapmap && watchify src/index.js -s mapmap --debug --verbose -p [ sourcemapify --base ../../lib ] --ignore d3-dsv -o ../../lib/mapmap.js"
   },
   "dependencies": {
     "mapmap": "^0.2.1"
