@@ -1,5 +1,2 @@
-setlocal
-set port=8089
-start /b python -m SimpleHTTPServer %port%
-start "" "http://localhost:%port%/"
-pause
+start /b python server.py 8089
+"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" http://localhost:8089/
