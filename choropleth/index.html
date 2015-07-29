@@ -18,10 +18,12 @@ body {
 h3 {
     margin: 0 0 1em;
 }
-#mapEl {
-    position: relative;
+svg {
+    xposition: relative;
     width: 100%;
-    height: 300px;
+    max-width: 740px;
+    xheight: 200px;
+    border: 1px solid #ccc;
 }
 
 .mapLegend {
@@ -34,6 +36,11 @@ h3 {
     background-color: rgba(255,255,255,0.9);
 }
 
+section {
+    clear: both;
+    margin-bottom: 100px;
+}
+
 .map-example,
 .map-wrapper {
     position: relative;
@@ -41,6 +48,30 @@ h3 {
 
 svg.mapmap .gemeinden path {
     display: none;
+}
+
+pre {
+    padding: 10px;
+    background: #fafafa;
+    color: #444;
+    border: 1px solid #ccc;
+}
+pre b {
+    color: #000;
+}
+
+.map-example pre {
+    width: 100%;
+    max-width: 740px;
+    margin: 0 auto;
+    xfloat: left;
+}
+
+.map-example .map-wrapper {
+    width: 100%;
+    max-width: 740px;
+    margin: 30px auto;
+    xfloat: left;
 }
 
 @media (max-width: 760px) {
@@ -68,15 +99,24 @@ function mapEl() {
 }
 </script>
 
+<h1>Make some maps with mapmap.js</h1>
+
+
+
+
+<h2>Geometry & Projection</h2>
+
+
 
 
 <section class="map-example">
 <pre class="code">
-var map = mapmap('#mapElement')
+<b>var map = mapmap('#mapElement')
     .geometry('../data/austria.topojson')
-;
+;</b>
 </pre>
 
+<div class="map-wrapper">
 <svg width="800" height="400"></svg>
 
 <script>
@@ -84,6 +124,7 @@ var map = mapmap(mapEl())
     .geometry('../data/austria.topojson')
 ;
 </script>
+</div>
 </section>
 
 
@@ -93,10 +134,11 @@ var map = mapmap(mapEl())
 <pre class="code">
 var map = mapmap('#mapElement')
     .geometry('../data/austria.topojson')
-    .projection(d3.geo.conicEqualArea().rotate([-14.4, 0]).parallels([46, 49]))
+    <b>.projection(d3.geo.conicEqualArea().rotate([-14.4, 0]).parallels([46, 49]))</b>
 ;
 </pre>
 
+<div class="map-wrapper">
 <svg width="800" height="400"></svg>
 
 <script>
@@ -105,7 +147,13 @@ var map = mapmap(mapEl())
     .projection(d3.geo.conicEqualArea().rotate([-14.4, 0]).parallels([46, 49]))
 ;
 </script>
+</div>
 </section>
+
+
+
+
+<h2>Data & Metadata</h2>
 
 
 
@@ -114,9 +162,9 @@ var map = mapmap(mapEl())
 <pre class="code">
 var map = mapmap('#mapElement')
     .geometry('../data/austria.topojson', 'iso')
-    .data('../data/places-AT.csv', 'code')
+    <b>.data('../data/places-AT.csv', 'code')
     .choropleth('population')    
-    .legend(mapmap.legend.html())
+    .legend(mapmap.legend.html())</b>
 ;
 </pre>
 
@@ -140,6 +188,28 @@ var map = mapmap(mapEl())
 <section class="map-example">
 <pre class="code">
 var map = mapmap('#mapElement')
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    <b>.meta({
+        'population': {
+            label: "District Population",
+            numberFormat: '0,000',
+            scale: 'threshold',
+            domain: [20000,40000,80000,150000,500000],
+            color: colorbrewer.YlOrRd[6]
+        }
+    })</b>
+    .choropleth('population')    
+    .legend(mapmap.legend.html())
+    .hoverInfo(['name','population'])
+;
+</pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT.csv', 'code')
     .meta({
@@ -155,31 +225,13 @@ var map = mapmap('#mapElement')
     .legend(mapmap.legend.html())
     .hoverInfo(['name','population'])
 ;
-</pre>
-
-<div class="map-wrapper">
-<svg width="800" height="400"></svg>
-
-<script>
-var map = mapmap(mapEl())
-    .geometry('../data/austria.topojson', 'iso')
-    .data('../data/places-AT.csv', 'code')
-    .meta({
-        'population': {
-            label: "District Population",
-            numberFormat: '0,000',
-            scale: 'threshold',
-            domain: [20000,40000,80000,150000,500000],
-            color: colorbrewer.YlOrRd[6]
-        }
-    })
-    .choropleth('population')    
-    .legend(mapmap.legend.html())
-    .hoverInfo(['name','population'])
-;
 </script>
 </div>
 </section>
+
+
+
+<h2>Selections</h2>
 
 
 
@@ -187,9 +239,9 @@ var map = mapmap(mapEl())
 <section class="map-example">
 
 <pre class="code">
-function isLowerAustria(d) {
-    return d.iso && d.iso.length == 3 && d.iso[0] == '3';
-}
+<b>function isSalzburg(d) {
+    return d.iso && d.iso.length == 3 && d.iso[0] == '5';
+}</b>
 
 var map = mapmap('#mapElement')
     .geometry('../data/austria.topojson', 'iso')
@@ -203,9 +255,9 @@ var map = mapmap('#mapElement')
             numberFormat:'0,000'
         }
     })
-    .select(isLowerAustria)
+    <b>.select(isSalzburg)
     .extent()
-    .highlight()
+    .highlight()</b>
     .choropleth('population')
     .hoverInfo(['name','population'])
     .applyBehavior(mapmap.behavior.zoom())
@@ -217,6 +269,10 @@ var map = mapmap('#mapElement')
 <svg width="800" height="400"></svg>
 
 <script>
+function isSalzburg(d) {
+    return d.iso && d.iso.length == 3 && d.iso[0] == '5';
+}
+
 var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT.csv', 'code')
@@ -229,7 +285,7 @@ var map = mapmap(mapEl())
             numberFormat:'0,000'
         }
     })
-    .select(isLowerAustria)
+    .select(isSalzburg)
     .extent()
     .highlight()
     .choropleth('population')
@@ -237,14 +293,20 @@ var map = mapmap(mapEl())
     .applyBehavior(mapmap.behavior.zoom())
     .legend(mapmap.legend.html())
 ;
-
-function isLowerAustria(d) {
-    return d.iso && d.iso.length == 3 && d.iso[0] == '3';
-}
 </script>
 </div>
 </section>
 
+
+
+<h2>Interaction</h2>
+
+
+
+<h2>Extensing mapmap.js</h2>
+
+<section>
 <small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
+</section>
 
 </body>
