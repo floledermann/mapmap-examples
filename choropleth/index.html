@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style type="text/css">
 html {
     margin: 0;
@@ -19,10 +20,8 @@ h3 {
     margin: 0 0 1em;
 }
 svg {
-    xposition: relative;
     width: 100%;
     max-width: 740px;
-    xheight: 200px;
     border: 1px solid #ccc;
 }
 
@@ -30,10 +29,10 @@ svg {
     position: absolute;
     z-index: 1;
     top: 0;
-    left: 20px;
+    left: 13px;
     padding: 10px;
     border: 1px solid #ccc;
-    background-color: rgba(255,255,255,0.9);
+    background-color: rgba(98%,98%,98%,0.9);
 }
 
 section {
@@ -55,13 +54,13 @@ pre {
     background: #fafafa;
     color: #444;
     border: 1px solid #ccc;
+    overflow-x: auto;
 }
 pre b {
     color: #000;
 }
 
 .map-example pre {
-    width: 100%;
     max-width: 740px;
     margin: 0 auto;
     xfloat: left;
@@ -73,10 +72,32 @@ pre b {
     margin: 30px auto;
     xfloat: left;
 }
+.subh {
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+.mapLegend.empty h3 {
+    margin-bottom: 0;
+}
 
 @media (max-width: 760px) {
     .mapLegend {
         position: static;
+    }
+    pre {
+        width: auto;
+        padding-bottom: 20px;
+    }
+    .map-example .map-wrapper {
+        margin: 10px auto;
+    }
+    section {
+        margin-bottom: 50px;
+    }
+    .mapLegend {
+        font-size: 9px;
+        padding: 5px;
+        border-bottom: none;
     }
 }
 </style>
@@ -99,7 +120,8 @@ function mapEl() {
 }
 </script>
 
-<h1>Make some maps with mapmap.js</h1>
+<h1>Let's make some maps</h1>
+<p class="subh">with <a href="https://github.com/floledermann/mapmap.js">mapmap.js</a></p>
 
 
 
@@ -260,7 +282,6 @@ var map = mapmap('#mapElement')
     .highlight()</b>
     .choropleth('population')
     .hoverInfo(['name','population'])
-    .applyBehavior(mapmap.behavior.zoom())
     .legend(mapmap.legend.html())
 ;
 </pre>
@@ -290,7 +311,6 @@ var map = mapmap(mapEl())
     .highlight()
     .choropleth('population')
     .hoverInfo(['name','population'])
-    .applyBehavior(mapmap.behavior.zoom())
     .legend(mapmap.legend.html())
 ;
 </script>
@@ -303,7 +323,52 @@ var map = mapmap(mapEl())
 
 
 
-<h2>Extensing mapmap.js</h2>
+<section class="map-example">
+
+<pre class="code">
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({
+        'population':  {
+            label: "District Population",
+            domain: [0,200000],
+            color: colorbrewer.YlOrRd[5],
+        }
+    })
+    .choropleth('population')
+    .hoverInfo(['name'])
+    <b>.applyBehavior(mapmap.behavior.zoom())</b>
+;
+</pre>
+
+<div class="map-wrapper">
+<div class="mapLegend empty">
+<h3>Click to zoom in!</h3>
+</div>
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({
+        'population':  {
+            label: "District Population",
+            domain: [0,200000],
+            color: colorbrewer.YlOrRd[5],
+        }
+    })
+    .choropleth('population')
+    .hoverInfo(['name'])
+    .applyBehavior(mapmap.behavior.zoom())
+;
+</script>
+</div>
+</section>
+
+
+<h2>Extending mapmap.js</h2>
 
 <section>
 <small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
