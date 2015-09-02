@@ -338,7 +338,7 @@ var map = mapmap('#mapElement')
         }
     })
     .choropleth('population')
-    .hoverInfo(['name'])
+    .hoverInfo(['name','population'])
     <b>.applyBehavior(mapmap.behavior.zoom())</b>
 ;
 </pre>
@@ -358,10 +358,11 @@ var map = mapmap(mapEl())
             label: "District Population",
             domain: [0,200000],
             color: colorbrewer.YlOrRd[5],
+            numberFormat:'0,000'
         }
     })
     .choropleth('population')
-    .hoverInfo(['name'])
+    .hoverInfo(['name','population'])
     .applyBehavior(mapmap.behavior.zoom())
 ;
 </script>
