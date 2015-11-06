@@ -6,7 +6,6 @@
 #mapHolder {
     position: absolute;
     width: 100%;
-    left: 200px;
 }
 svg {
     left: 250px;
@@ -19,6 +18,7 @@ svg {
 	font-family: sans-serif;
 	font-size: 10px;
 	width: 150px;
+    border: 1px solid #eee;
     border-radius: 3px;
     box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.4);
     display: none;
@@ -31,7 +31,6 @@ svg .gemeinden path {
 
 <body>
 <p>
-On resizing the browser window, the map should scale smoothly in all browsers. (<a href="https://github.com/floledermann/mapmap.js/issues/13">#13</a>)
 </p>
 <div id="mapHolder">
 <svg id="mapEl" width="500" height="700"></svg>
@@ -48,14 +47,21 @@ On resizing the browser window, the map should scale smoothly in all browsers. (
 
 var map = mapmap('#mapEl', {locale: 'de'})
     .geometry('../data/austria.topojson', 'iso')
-    .data('../data/places-AT.csv', 'code')
+    .data('undefined-values.csv', 'code')
     .meta({
         population: {
-            numberFormat: '0f'
+            valueLabel: "Bevölkerung",
+            valueUnit: "Pers.",
+            domain: [10000,25000,100000,1000000],
+            scale: 'threshold',
+            numberFormat: ',0f',
+            undefinedColor: '#dddddd',
+            undefinedLabel: 'k.A.'
         }
     })
+    .select('bezirke')
     .choropleth('population')
-    .hoverInfo(['name','population'])
+    //.hoverInfo(['name','population'])
     .applyBehavior(mapmap.behavior.zoom())
     .legend(mapmap.legend.html())
 ;
