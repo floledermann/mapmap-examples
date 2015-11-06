@@ -125,6 +125,29 @@ function mapEl() {
 <h1>Scales &amp; Legends</h1>
 <p class="subh">with <a href="https://github.com/floledermann/mapmap.js">mapmap.js</a></p>
 
+<section class="map-example">
+<pre class="code auto"></pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({
+        population: {
+            label: "District Population",
+        }
+    })
+    .select('bezirke')
+    .choropleth('population')
+    .legend(mapmap.legend.html())
+;
+</script>
+</div>
+</section>
+
 
 <section class="map-example">
 <pre class="code auto"></pre>
@@ -133,7 +156,62 @@ function mapEl() {
 <svg width="800" height="400"></svg>
 
 <script>
-var map = mapmap(mapEl(), {locale: 'en'})
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({
+        population: {
+            label: "District Population",
+            scale: 'quantize',
+            domain: [0,2000000],
+            colors: colorbrewer.YlGnBu[5],
+            numberFormat: ',.0f',
+        }
+    })
+    .select('bezirke')
+    .choropleth('population')
+    .legend(mapmap.legend.html())
+;
+</script>
+</div>
+</section>
+
+
+<section class="map-example">
+<pre class="code auto"></pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({
+        population: {
+            label: "District Population",
+            scale: 'threshold',
+            domain: [10000,25000,100000,1000000],
+            colors: colorbrewer.YlGnBu[5],
+            numberFormat: ',.0f',
+        }
+    })
+    .select('bezirke')
+    .choropleth('population')
+    .legend(mapmap.legend.html())
+;
+</script>
+</div>
+</section>
+
+<section class="map-example">
+<pre class="code auto"></pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl(), {locale: 'de'})
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT_incomplete.csv', 'code')
     .meta({
@@ -142,7 +220,7 @@ var map = mapmap(mapEl(), {locale: 'en'})
             scale: 'threshold',
             domain: [10000,25000,100000,1000000],
             colors: colorbrewer.YlGnBu[5],
-            numberFormat: ',0f', // thousands separator, no fractional digits
+            numberFormat: ',.0f',
             undefinedColor: '#dddddd'
         }
     })
@@ -153,6 +231,8 @@ var map = mapmap(mapEl(), {locale: 'en'})
 </script>
 </div>
 </section>
+
+
 
 
 <section>
