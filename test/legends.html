@@ -125,6 +125,7 @@ function mapEl() {
 <h1>Scales &amp; Legends</h1>
 <p class="subh">with <a href="https://github.com/floledermann/mapmap.js">mapmap.js</a></p>
 
+
 <section class="map-example">
 <pre class="code auto"></pre>
 
@@ -241,7 +242,7 @@ var map = mapmap(mapEl(), {locale: 'de'})
 <svg width="800" height="400"></svg>
 
 <script>
-var map = mapmap(mapEl(), {locale: 'de'})
+var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT_incomplete.csv', 'code')
     .data(function(d) {
@@ -251,7 +252,7 @@ var map = mapmap(mapEl(), {locale: 'de'})
         county: {
             label: "County",
             scale: 'ordinal',
-            domain: [1,2,3,4,5,6,7,8,9],
+            domain: ['1','2','3','4','5','6','7','8','9'],
             valueLabels: ["Burgenland","Kärnten","Niederösterreich","Oberösterreich",
                           "Salzburg","Steiermark","Tirol","Vorarlberg","Wien"],
             colors: colorbrewer.Set1[9]
@@ -267,6 +268,39 @@ var map = mapmap(mapEl(), {locale: 'de'})
 </section>
 
 
+<section class="map-example">
+<pre class="code auto"></pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT_incomplete.csv', 'code')
+    .meta({
+        population: {
+            label: "District Population",
+            scale: 'threshold',
+            domain: [10000,25000,100000,1000000],
+            colors: colorbrewer.YlGnBu[5],
+            numberFormat: ',.0f',
+            undefinedColor: '#eeeeee'
+        }
+    })
+    .select('bezirke')
+    .choropleth('population')
+    .legend(mapmap.legend.html({
+        histogram: true,
+        labelStyle: {
+            display: 'inline-block',
+            width: '11em'
+        }
+    }))
+;
+</script>
+</div>
+</section>
 
 
 <section>
