@@ -81,6 +81,10 @@ pre b {
     margin-bottom: 0;
 }
 
+.legendCell.undefined {
+    margin-top: 0.5em;
+}
+
 @media (max-width: 760px) {
     .mapLegend {
         position: static;
@@ -218,12 +222,13 @@ var map = mapmap(mapEl(), {locale: 'de'})
     .data('../data/places-AT_incomplete.csv', 'code')
     .meta({
         population: {
-            label: "District Population",
+            label: "Wohnbevölkerung",
             scale: 'threshold',
             domain: [10000,25000,100000,1000000],
             colors: colorbrewer.YlGnBu[5],
             numberFormat: ',.0f',
-            undefinedColor: '#dddddd'
+            undefinedColor: '#dddddd',
+            undefinedLabel: 'k.A.'
         }
     })
     .select('bezirke')
@@ -285,7 +290,7 @@ var map = mapmap(mapEl())
             domain: [10000,25000,100000,1000000],
             colors: colorbrewer.YlGnBu[5],
             numberFormat: ',.0f',
-            undefinedColor: '#eeeeee'
+            undefinedColor: '#dddddd'
         }
     })
     .select('bezirke')
