@@ -12,12 +12,46 @@ python -m SimpleHTTPServer 8089
 
 on your platform and point your browser to [`http://localhost:8089`](http://localhost:8089)
 
+## Developing mapmap
+
+If you want to use this repository as a base to test out changes for mapmap.js, the best setup is to link your local checkout of the mapmap.js repository as a npm package using [`npm link`](https://docs.npmjs.com/cli/link).
+
+To do this, in the directory of your mapmap.js repository, run
+
+```
+npm link
+```
+
+Then, in the directory of this repository (mapmap-examples), run this sequence of commands:
+
+```
+npm link mapmap
+npm install
+```
+
+You can then edit the mapmap.js source code in the original repository and have the changes reflected here. To automatically trigger a rebuild of mapmap.js with every change, run
+
+```
+npm run watch
+```
+
+and keep it running as long as you develop.
+
 ## Included examples
 
 Folder     | Description
 -----------|-------------
 choropleth | A simple zoomable choropleth map
+data       | Common data files used in the examples
 minard     | A simplified version of [Minard's Map](http://datavizblog.com/2013/05/26/dataviz-history-charles-minards-flow-map-of-napoleons-russian-campaign-of-1812-part-5/) using mapmap.js
+test       | A collection of small test examples
+
+Other folders:
+
+Folder     | Description
+-----------|-------------
+data       | Common data files used in the examples
+lib        | 3rd party JavaScript libraries used in the examples
 
 ## More information 
 
