@@ -72,8 +72,9 @@ code,name,lat,lon,population,area,type,level
 418,Wels-Land,48.13,13.93,64940,457.66,Bezirk,5
 501,Salzburg,47.78,13.17,141552,1004.0,Bezirk,5
 502,Hallein,47.6,13.3,55383,668.31,Bezirk,5
-#503,Salzburg-Umgebung,47.78,13.17,138212,1004.36,Bezirk,5
-504,Sankt Johann im Pongau,47.3,13.3,79405,1755.37,Bezirk,5
+# Next two lines have empty "population" field
+503,Salzburg-Umgebung,47.78,13.17,,1004.36,Bezirk,5
+504,Sankt Johann im Pongau,47.3,13.3,,1755.37,Bezirk,5
 505,Tamsweg,47.15,13.7,21261,1019.68,Bezirk,5
 506,Zell am See,47.28,12.7,84888,2640.85,Bezirk,5
 601,Graz,47.07,15.44,240278,127.56,Bezirk,5
