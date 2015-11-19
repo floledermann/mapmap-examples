@@ -23,7 +23,7 @@ svg {
     box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.4);
     display: none;
 }
-svg .gemeinden path {
+svg .municipalities path {
     display: none;
 }
 </style>
@@ -58,7 +58,7 @@ var map = mapmap('#mapEl', {locale: 'de'})
             undefinedLabel: 'k.A.'
         }
     })
-    .select('bezirke')
+    .select('districts')
     .choropleth('population')
     .hoverInfo(['name','population'])
     .applyBehavior(mapmap.behavior.zoom())

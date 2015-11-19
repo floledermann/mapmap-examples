@@ -46,7 +46,7 @@ section {
     position: relative;
 }
 
-svg.mapmap .gemeinden path {
+svg.mapmap .municipalities path {
     display: none;
 }
 
@@ -145,7 +145,7 @@ var map = mapmap(mapEl())
             label: "District Population",
         }
     })
-    .select('bezirke')
+    .select('districts')
     .choropleth('population')
     .legend(mapmap.legend.html())
     .hoverInfo(['name','population'])
@@ -174,7 +174,7 @@ var map = mapmap(mapEl())
             numberFormat: ',.0f',
         }
     })
-    .select('bezirke')
+    .select('districts')
     .choropleth('population')
     .legend(mapmap.legend.html())
 ;
@@ -202,7 +202,7 @@ var map = mapmap(mapEl())
             numberFormat: ',.0f',
         }
     })
-    .select('bezirke')
+    .select('districts')
     .choropleth('population')
     .legend(mapmap.legend.html())
 ;
@@ -231,7 +231,7 @@ var map = mapmap(mapEl(), {locale: 'de'})
             undefinedLabel: 'k.A.'
         }
     })
-    .select('bezirke')
+    .select('districts')
     .choropleth('population')
     .legend(mapmap.legend.html())
 ;
@@ -263,7 +263,7 @@ var map = mapmap(mapEl())
             colors: colorbrewer.Set1[9]
         }
     })
-    .select('bezirke')
+    .select('districts')
     .hoverInfo(['name','county'])
     .choropleth('county')
     .legend(mapmap.legend.html())
@@ -293,7 +293,7 @@ var map = mapmap(mapEl())
             undefinedColor: '#dddddd'
         }
     })
-    .select('bezirke')
+    .select('districts')
     .choropleth('population')
     .legend(mapmap.legend.html({
         histogram: true,
