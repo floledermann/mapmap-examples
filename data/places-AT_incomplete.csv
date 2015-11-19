@@ -58,7 +58,8 @@ code,name,lat,lon,population,area,type,level
 404,Braunau am Inn,48.26,13.03,95970,1040.46,Bezirk,5
 405,Eferding,48.3,13.97,31081,259.73,Bezirk,5
 406,Freistadt,48.51,14.51,64517,993.86,Bezirk,5
-#407,Gmunden,47.75,13.75,100023,1432.74,Bezirk,5
+# Missing record
+# 407,Gmunden,47.75,13.75,100023,1432.74,Bezirk,5
 408,Grieskirchen,48.27,13.8,62448,578.99,Bezirk,5
 409,Kirchdorf an der Krems,47.8,14.23,55684,1239.79,Bezirk,5
 410,Linz-Land,48.17,14.3,132896,460.27,Bezirk,5
@@ -68,12 +69,14 @@ code,name,lat,lon,population,area,type,level
 414,Schärding,48.43,13.6,57080,618.49,Bezirk,5
 415,Steyr-Land,47.9,14.47,58358,971.7,Bezirk,5
 416,Urfahr-Umgebung,48.4,14.28,79317,649.36,Bezirk,5
-#417,Vöcklabruck,47.92,13.55,128189,1084.26,Bezirk,5
+# Missing record
+# 417,Vöcklabruck,47.92,13.55,128189,1084.26,Bezirk,5
 418,Wels-Land,48.13,13.93,64940,457.66,Bezirk,5
 501,Salzburg,47.78,13.17,141552,1004.0,Bezirk,5
 502,Hallein,47.6,13.3,55383,668.31,Bezirk,5
-# Next two lines have empty "population" field
+# Empty "population" field
 503,Salzburg-Umgebung,47.78,13.17,,1004.36,Bezirk,5
+# Empty "population" field
 504,Sankt Johann im Pongau,47.3,13.3,,1755.37,Bezirk,5
 505,Tamsweg,47.15,13.7,21261,1019.68,Bezirk,5
 506,Zell am See,47.28,12.7,84888,2640.85,Bezirk,5
@@ -85,13 +88,16 @@ code,name,lat,lon,population,area,type,level
 609,Knittelfeld,47.21,14.83,29525,578.09,Bezirk,5
 610,Leibnitz,46.78,15.54,76325,681.52,Bezirk,5
 611,Leoben,47.39,15.09,66176,1099.68,Bezirk,5
-#612,Liezen,47.57,14.24,81663,3270.77,Bezirk,5
+# Missing record
+# 612,Liezen,47.57,14.24,81663,3270.77,Bezirk,5
 613,Mürzzuschlag,47.61,15.67,41945,848.86,Bezirk,5
-614,Murau,47.11,14.17,30775,1384.58,Bezirk,5
+# Invalid value
+614,Murau,47.11,14.17,A,1384.58,Bezirk,5
 615,Radkersburg,46.75,15.85,23575,336.96,Bezirk,5
 616,Voitsberg,47.05,15.15,53250,678.6,Bezirk,5
 617,Weiz,47.22,15.62,86755,1070.48,Bezirk,5
-620,Murtal,47.17,14.66,47192,1675.49,Bezirk,5
+# Invalid value
+620,Murtal,47.17,14.66,-,1675.49,Bezirk,5
 621,Bruck-Mürzzuschlag,47.42,15.27,102707,2154.8,Bezirk,5
 622,Hartberg-Fürstenfeld,47.33,15.93,89527,1223.03,Bezirk,5
 623,Südoststeiermark,46.96,15.88,91130,,Bezirk,5
