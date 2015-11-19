@@ -47,6 +47,11 @@ svg .municipalities path {
 var map = mapmap('#mapEl', {locale: 'de'})
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT_incomplete.csv', 'code')
+    .data(function(d) {
+        if (d.population === null) {
+            console.log(d);
+        }
+    })
     .meta({
         population: {
             valueLabel: "Bevölkerung",
@@ -62,7 +67,7 @@ var map = mapmap('#mapEl', {locale: 'de'})
     .choropleth('population')
     .hoverInfo(['name','population'])
     .applyBehavior(mapmap.behavior.zoom())
-    .legend(mapmap.legend.html())
+    .legend(mapmap.legend.html({histogram: true}))
 ;
 </script>
 

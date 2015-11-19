@@ -45,23 +45,22 @@ svg .municipalities path {
 
 <script>
 
-var map = mapmap('#mapEl', {locale: 'de'})
+var map = mapmap('#mapEl', {locale: 'en'})
     .geometry('../data/austria.topojson', 'iso')
-    .data('undefined-values.csv', 'code')
+    .data('../data/places-AT.csv', 'code')
     .meta({
         population: {
-            valueLabel: "Bevölkerung",
+            label: "Population Count",
+            valueLabel: "Population",
             valueUnit: "Pers.",
             domain: [10000,25000,100000,1000000],
             scale: 'threshold',
             numberFormat: ',0f',
-            undefinedColor: '#dddddd',
-            undefinedLabel: 'k.A.'
         }
     })
     .select('districts')
     .choropleth('population')
-    //.hoverInfo(['name','population'])
+    .hoverInfo(['name','population'])
     .applyBehavior(mapmap.behavior.zoom())
     .legend(mapmap.legend.html())
 ;

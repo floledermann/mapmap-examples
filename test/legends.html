@@ -251,13 +251,13 @@ var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT_incomplete.csv', 'code')
     .data(function(d) {
-        return {county:d.iso[0]};
+        return {county:'C' + d.iso[0]};
     })
     .meta({
         county: {
             label: "County",
             scale: 'ordinal',
-            domain: ['1','2','3','4','5','6','7','8','9'],
+            domain: ['C1','C2','C3','C4','C5','C6','C7','C8','C9'],
             valueLabels: ["Burgenland","Kärnten","Niederösterreich","Oberösterreich",
                           "Salzburg","Steiermark","Tirol","Vorarlberg","Wien"],
             colors: colorbrewer.Set1[9]
