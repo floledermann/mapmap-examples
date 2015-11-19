@@ -139,10 +139,10 @@ function mapEl() {
 <script>
 var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
-    .data('../data/places-AT.csv', 'code')
+    .data('../data/places-AT_incomplete.csv', 'code')
     .meta({
         population: {
-            label: "District Population",
+            label: "District Population"
         }
     })
     .select('districts')
@@ -164,7 +164,7 @@ var map = mapmap(mapEl())
 <script>
 var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
-    .data('../data/places-AT.csv', 'code')
+    .data('../data/places-AT_incomplete.csv', 'code')
     .meta({
         population: {
             label: "District Population",
@@ -192,7 +192,7 @@ var map = mapmap(mapEl())
 <script>
 var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
-    .data('../data/places-AT.csv', 'code')
+    .data('../data/places-AT_incomplete.csv', 'code')
     .meta({
         population: {
             label: "District Population",
