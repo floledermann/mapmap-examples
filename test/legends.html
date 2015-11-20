@@ -177,6 +177,7 @@ var map = mapmap(mapEl())
     .select('districts')
     .choropleth('population')
     .legend(mapmap.legend.html())
+    .hoverInfo(['name','population'])
 ;
 </script>
 </div>
