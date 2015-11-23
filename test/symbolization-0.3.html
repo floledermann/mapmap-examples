@@ -47,7 +47,7 @@ section {
 }
 
 pre {
-    padding: 10px;
+    padding: 10px 2px 10px 10px;
     background: #fafafa;
     color: #444;
     border: 1px solid #ccc;
@@ -150,7 +150,11 @@ var map = mapmap(mapEl())
     })
 ;
 
-var salzburg = map.select(d => d.iso && d.iso.length == 3 && d.iso[0] == '5' )
+// old map.select(d => d.iso && d.iso.length == 3 && d.iso[0] == '5' )
+// now with hierarchical selections:
+var salzburg = map
+    .select('districts')
+    .select(function(d) { return d.iso[0] == '5';})
     .choropleth('population', {
         classes: mapmap.thresholds([15000,25000,100000,1000000]),       
         colors: colorbrewer.YlGnBu[5]
