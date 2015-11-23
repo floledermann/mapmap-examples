@@ -160,7 +160,8 @@ var salzburg = map.select(d => d.iso && d.iso.length == 3 && d.iso[0] == '5' )
         'stroke-width': '1.5',
         glow: true
     })
-    .symbolize([sketchy({}), mapmap.glow()])
+    .symbolize(sketchy({}))
+    .highlight() // .symbolize(mapmap.highlight) ?
     .legend(mapmap.legend.html())
     .behavior([mapmap.hoverOutline(), mapmap.hoverInfo(['name','population'])])
 ;
