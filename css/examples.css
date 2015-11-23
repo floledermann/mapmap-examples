@@ -10,11 +10,19 @@ body {
     margin: 0;
     padding: 10px;
 }
+main {
+    max-width: 740px;
+    margin: 30px auto;
+}
+h2 {
+    margin: 30px 0 30px;
+}
 h3 {
     margin: 0 0 1em;
 }
 svg {
     width: 100%;
+    box-sizing: border-box;
     border: 1px solid #ccc;
 }
 
@@ -48,20 +56,17 @@ pre {
     overflow-x: auto;
 }
 pre.code {
-    font-weight: bold;
+    margin: 5px auto;
 }
 pre b {
+    font-weight: bold;
     color: #000;
-}
-
-.map-example pre {
-    margin: 0 auto;
 }
 
 .map-example .map-wrapper {
     width: 100%;
     max-width: 740px;
-    margin: 20px auto;
+    margin: 5px auto 20px;
 }
 .subh {
     margin-top: -10px;
