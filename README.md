@@ -41,10 +41,9 @@ and keep it running as long as you develop.
 
 Folder     | Description
 -----------|-------------
-choropleth | A simple zoomable choropleth map
-data       | Common data files used in the examples
+tutorial   | Tutorials, serving as a starting point if you want to learn mapmap.js
+test       | Small, uncategorized examples and in-browser tests for various features.
 minard     | A simplified version of [Minard's Map](http://datavizblog.com/2013/05/26/dataviz-history-charles-minards-flow-map-of-napoleons-russian-campaign-of-1812-part-5/) using mapmap.js
-test       | A collection of small test examples
 
 Other folders:
 
