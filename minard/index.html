@@ -58,6 +58,11 @@ var map = mapmap('#mapEl')
         map: dd.map.key('group'),
         reduce: dd.emit.geo.segments()
     })
+    .meta({
+        'size': {
+            numberFormat: ',.0d'
+        }
+    })
     .hoverInfo('size')
     .symbolize(lineWidth) // assign visual attributes (svg attributes) / TODO: possibly depending on viewing context (e.g. highlight)
     // The anchorFunction "projects" any data to a point on the map
