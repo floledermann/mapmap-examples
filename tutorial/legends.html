@@ -13,23 +13,12 @@ svg.mapmap .municipalities path {
 <body>
 
 <script src="../lib/jquery-1.11.3.js"></script>
-<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+<script src="../lib/d3.js" charset="utf-8"></script>
 <script src="../lib/promise-1.0.0.js" charset="utf-8"></script>
 <script src="../lib/topojson.js" charset="utf-8"></script>
 <script src="../lib/colorbrewer.js" charset="utf-8"></script>
 <script src="../lib/mapmap.js"></script>
 <script src="../lib/examples.js"></script>
-
-<script>
-function mapEl() {
-    var script = document.currentScript;
-    if (!script) {
-        var scripts = document.getElementsByTagName( 'script' );
-        script = scripts[ scripts.length - 1 ];
-    }
-    return script.parentNode.getElementsByTagName('svg')[0];
-}
-</script>
 
 <main>
 
