@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/examples.css">
+<style type="text/css">
+svg.mapmap .municipalities path {
+    display: none;
+}
+</style>
+</head>
+<body>
+
+<script src="../lib/jquery-1.11.3.js"></script>
+<script src="../lib/d3.js" charset="utf-8"></script>
+<script src="../lib/promise-1.0.0.js" charset="utf-8"></script>
+<script src="../lib/topojson.js" charset="utf-8"></script>
+<script src="../lib/colorbrewer.js" charset="utf-8"></script>
+<script src="../lib/mapmap.js"></script>
+<script src="../lib/examples.js"></script>
+
+<main>
+
+<h1>Misc Features</h1>
+<p class="subh">with <a href="https://github.com/floledermann/mapmap.js">mapmap.js</a></p>
+
+<p><a href="./">Up to Tutorial</a></p>
+
+<section class="map-example">
+
+<h2>Graticules</h2>
+
+<pre class="code auto"></pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson')
+    .geometry(d3.geo.graticule().step([1,1]).precision(0.33)(), {setExtent: false}) //!
+    .projection(d3.geo.conicEqualArea().rotate([-12.4, 0]).parallels([46, 49]))
+;
+
+</script>
+</div>
+</section>
+
+<small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
+
+</main>
+
+</body>
