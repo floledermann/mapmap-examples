@@ -31,6 +31,8 @@ svg.mapmap .municipalities path {
 
 <h2>Graticules</h2>
 
+<p>New in version 0.3</p>
+
 <pre class="code auto"></pre>
 
 <div class="map-wrapper">
@@ -41,6 +43,9 @@ var map = mapmap(mapEl())
     .geometry('../data/austria.topojson')
     .geometry(d3.geo.graticule().step([1,1]).precision(0.33)(), {setExtent: false}) //!
     .projection(d3.geo.conicEqualArea().rotate([-12.4, 0]).parallels([46, 49]))
+    .select('counties')
+    .attr({fill: '#ffffff'})
+    .highlight()
 ;
 
 </script>
