@@ -139,8 +139,35 @@ Testbed for v0.3 symbolization pipeline. <strong>This code is not working yet!</
 <svg width="800" height="400"></svg>
 
 <script>
+<!-- legacy API - can be deleted after transition to 0.3 is clear -->
 var map = mapmap(mapEl())
-    .geometry('../data/austria.topojson', 'iso', {entities:['counties','districts']})
+    //.geometry('../data/austria.topojson', 'iso', {entities:['counties','districts']})
+    .entities('../data/austria.topojson', 'iso', {extract:['counties','districts']})
+    .data('../data/places-AT.csv', 'code')
+    .meta({
+        'population': {
+            label: "District Population",
+            numberFormat: ',.0d'
+        }
+    })
+;
+
+</script>
+</div>
+</section>
+
+<section class="map-example">
+<p>
+Testbed for v0.3 symbolization pipeline. <strong>This code is not working yet!</strong>
+</p>
+<pre class="code auto"></pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
+    .entities('../data/austria.topojson', 'iso', {extract:['counties','districts']})
     .data('../data/places-AT.csv', 'code')
     .meta({
         'population': {
@@ -152,25 +179,34 @@ var map = mapmap(mapEl())
 
 // old map.select(d => d.iso && d.iso.length == 3 && d.iso[0] == '5' )
 // now with hierarchical selections:
+
+// old map.select(d => d.iso && d.iso.length == 3 && d.iso[0] == '5' )
+// now with hierarchical selections:
 var salzburg = map
+    .setState({strokeWidth: 1.5})
     .select('districts')
     .select(function(d) { return d.iso[0] == '5';})
-    .choropleth('population', {
-        classes: mapmap.thresholds([15000,25000,100000,1000000]),       
-        colors: colorbrewer.YlGnBu[5]
-    })
-    .attr({
-        //fill: mapmap.attributeScale('population', mapmap.linear([0,2000000]).range(['#000000','#ffffff'])),
-        'stroke-width': '1.5',
+    .representation(mapmap.representation.SVGPath()) // should be implicit
+    //.representation(mapmap.sketchy({}))
+    .attributes({
+        'fill': mapmap.toColor('population', {
+            classes: mapmap.thresholds([15000,25000,100000,1000000]),       
+            colors: colorbrewer.YlGnBu[5]
+        }),
+        'stroke-width': function(d, state) {
+            return state.strokeWidth || 1.5;
+        },
         glow: true
     })
-    .symbolize(sketchy({}))
-    .highlight() // .symbolize(mapmap.highlight) ?
-    .legend(mapmap.legend.html())
     .behavior([mapmap.hoverOutline(), mapmap.hoverInfo(['name','population'])])
+    .render(mapmap.renderer.D3()) // should be implicit
+;
+
+map.legend(mapmap.legend.html())
 ;
 
 map.extent(salzburg);
+
 
 // map has default selection (all entities), visual attributes (stroke-width: 0.2) and symbolizer (SVG path)
 
