@@ -8,11 +8,14 @@
 svg.mapmap .municipalities path {
     display: none;
 }
+svg.mapmap .counties path {
+    display: none;
+}
 </style>
 </head>
 <body>
 
-<script src="../lib/jquery-1.11.3.js"></script>
+<script src="../lib/jquery-1.11.3.js" charset="utf-8"></script>
 <script src="../lib/d3.js" charset="utf-8"></script>
 <script src="../lib/promise-1.0.0.js" charset="utf-8"></script>
 <script src="../lib/topojson.js" charset="utf-8"></script>
@@ -39,10 +42,56 @@ var map = mapmap(mapEl())
     .data('../data/places-AT_incomplete.csv', 'code')
     .meta({
         population: {
-            label: "District Population"
+            label: "District Population",
+            domain: [0,500000],
+            scale: 'linear',
+            'stroke-width': [0.1,4.0]
         }
     })
     .select('districts')
+    .symbolizeAttribute('population','stroke-width')
+;
+</script>
+</div>
+</section>
+
+
+<section class="map-example">
+<pre class="code auto"></pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT_incomplete.csv', 'code')
+    .meta({
+        population: {
+            label: "District Population",
+            domain: [0,500000],
+            scale: 'linear',
+            'stroke-width': [0.1,4.0]
+        }
+    })
+    .select('districts')
+    .symbolize(function(element, geometry, data) {
+        // TODO: we need a setup function to initialize this stuff
+        // and also the scale from metadata
+        var pathGenerator = d3.geo.path().projection(this.projection());
+        var centroid = pathGenerator.centroid(geometry);
+        // TODO: this should be derived from metadata
+        var radiusScale = d3.scale.sqrt().domain([0,2000000]).range([0,100]);
+        
+        this._elements.overlay.append('circle')
+            .attr({
+                r: radiusScale(data.population),
+                cx: centroid[0],
+                cy: centroid[1],
+                fill: 'none',
+                stroke: 'black'
+            });
+    })
 ;
 </script>
 </div>
