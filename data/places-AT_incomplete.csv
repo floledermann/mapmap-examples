@@ -1,118 +1,117 @@
-code,name,lat,lon,population,area,type,level
-1,Burgenland,47.5,16.42,287416,,Bundesland,3
-2,Kärnten,46.75,13.83,555881,,Bundesland,3
-3,Niederösterreich,48.33,15.75,1625485,,Bundesland,3
-4,Oberösterreich,48.25,14.0,1425422,,Bundesland,3
-5,Salzburg,47.42,13.25,534270,,Bundesland,3
-6,Steiermark,47.25,15.17,1215246,,Bundesland,3
-7,Tirol,47.25,11.33,722038,,Bundesland,3
-8,Vorarlberg,47.25,9.92,375282,,Bundesland,3
-9,Wien,48.25,16.42,1714142,,Bundesland,3
-101,Eisenstadt,47.85,16.52,12061,42.91,Bezirk,5
-102,Rust,47.8,16.68,1799,20.01,Bezirk,5
-103,Eisenstadt-Umgebung,47.83,16.58,39265,453.14,Bezirk,5
-104,Güssing,47.06,16.32,26604,485.44,Bezirk,5
-105,Jennersdorf,46.94,16.14,17752,253.35,Bezirk,5
-106,Mattersburg,47.73,16.43,37902,237.84,Bezirk,5
-107,Neusiedl am See,47.85,17.0,52169,1038.65,Bezirk,5
-108,Oberpullendorf,47.5,16.52,37505,701.49,Bezirk,5
-109,Oberwart,47.29,16.2,53158,732.62,Bezirk,5
-201,Klagenfurt,46.62,14.31,91723,120.11,Bezirk,5
-202,Villach,46.61,13.86,57829,134.89,Bezirk,5
-203,Hermagor,46.6,13.13,19472,808.02,Bezirk,5
-204,Klagenfurt Land,46.63,14.2,57262,765.59,Bezirk,5
-205,Sankt Veit an der Glan,46.77,14.36,57934,1493.49,Bezirk,5
-206,Spittal an der Drau,46.85,13.33,81172,2764.52,Bezirk,5
-207,Villach Land,46.67,13.83,64621,1009.37,Bezirk,5
-208,Völkermarkt,46.55,14.67,43354,907.49,Bezirk,5
-209,Wolfsberg,46.83,14.83,55989,973.79,Bezirk,5
-210,Feldkirchen,46.72,14.1,30535,558.56,Bezirk,5
-301,Krems an der Donau,48.4,15.58,23734,51.61,Bezirk,5
-302,Sankt Pölten,48.2,15.62,50474,108.48,Bezirk,5
-303,Waidhofen an der Ybbs,47.97,14.77,11824,131.57,Bezirk,5
-304,Wiener Neustadt,47.8,16.25,39324,60.97,Bezirk,5
-305,Amstetten,48.0,14.77,110211,1187.79,Bezirk,5
-306,Baden,47.95,16.2,130670,753.38,Bezirk,5
-307,Bruck an der Leitha,48.05,16.7,41028,494.95,Bezirk,5
-308,Gänserndorf,48.34,16.72,67717,1271.21,Bezirk,5
-309,Gmünd,48.75,15.08,39261,786.24,Bezirk,5
-310,Hollabrunn,48.58,16.08,49987,1010.72,Bezirk,5
-311,Horn,48.75,15.7,32049,783.99,Bezirk,5
-312,Korneuburg,48.42,16.3,70651,626.5,Bezirk,5
-313,Krems-Land,48.5,15.5,54661,923.95,Bezirk,5
-314,Lilienfeld,47.92,15.6,27171,931.55,Bezirk,5
-315,Melk,48.17,15.27,75808,1013.62,Bezirk,5
-316,Mistelbach,48.58,16.5,73026,1291.51,Bezirk,5
-317,Mödling,48.07,16.25,109762,277.02,Bezirk,5
-318,Neunkirchen,47.65,16.03,86408,1146.36,Bezirk,5
-319,Sankt Pölten-Land,48.2,15.7,94841,1121.61,Bezirk,5
-320,Scheibbs,47.9,15.15,41382,1023.51,Bezirk,5
-321,Tulln,48.3,16.0,66141,658.03,Bezirk,5
-322,Waidhofen an der Thaya,48.83,15.4,27629,669.14,Bezirk,5
-323,Wiener Neustadt Land,47.8,16.25,72831,969.72,Bezirk,5
-324,Wien-Umgebung,48.13,16.5,105476,484.47,Bezirk,5
-325,Zwettl,48.6,15.17,44921,1399.76,Bezirk,5
-401,Linz,48.3,14.3,187112,95.99,Bezirk,5
-402,Steyr,47.9,14.47,39116,26.56,Bezirk,5
-403,Wels,48.1,14.0,58146,45.92,Bezirk,5
-404,Braunau am Inn,48.26,13.03,95970,1040.46,Bezirk,5
-405,Eferding,48.3,13.97,31081,259.73,Bezirk,5
-406,Freistadt,48.51,14.51,64517,993.86,Bezirk,5
-# Missing record
-# 407,Gmunden,47.75,13.75,100023,1432.74,Bezirk,5
-408,Grieskirchen,48.27,13.8,62448,578.99,Bezirk,5
-409,Kirchdorf an der Krems,47.8,14.23,55684,1239.79,Bezirk,5
-410,Linz-Land,48.17,14.3,132896,460.27,Bezirk,5
-411,Perg,48.27,14.77,65163,613.52,Bezirk,5
-412,Ried im Innkreis,48.23,13.47,58625,585.01,Bezirk,5
-413,Rohrbach,48.53,13.95,57563,827.94,Bezirk,5
-414,Schärding,48.43,13.6,57080,618.49,Bezirk,5
-415,Steyr-Land,47.9,14.47,58358,971.7,Bezirk,5
-416,Urfahr-Umgebung,48.4,14.28,79317,649.36,Bezirk,5
-# Missing record
-# 417,Vöcklabruck,47.92,13.55,128189,1084.26,Bezirk,5
-418,Wels-Land,48.13,13.93,64940,457.66,Bezirk,5
-501,Salzburg,47.78,13.17,141552,1004.0,Bezirk,5
-502,Hallein,47.6,13.3,55383,668.31,Bezirk,5
-# Empty "population" field
-503,Salzburg-Umgebung,47.78,13.17,,1004.36,Bezirk,5
-# Empty "population" field
-504,Sankt Johann im Pongau,47.3,13.3,,1755.37,Bezirk,5
-505,Tamsweg,47.15,13.7,21261,1019.68,Bezirk,5
-506,Zell am See,47.28,12.7,84888,2640.85,Bezirk,5
-601,Graz,47.07,15.44,240278,127.56,Bezirk,5
-603,Deutschlandsberg,46.82,15.21,61391,863.49,Bezirk,5
-604,Feldbach,46.96,15.89,67556,727.25,Bezirk,5
-605,Fürstenfeld,47.05,16.08,23037,263.82,Bezirk,5
-606,Graz-Umgebung,47.13,15.4,136234,1100.89,Bezirk,5
-609,Knittelfeld,47.21,14.83,29525,578.09,Bezirk,5
-610,Leibnitz,46.78,15.54,76325,681.52,Bezirk,5
-611,Leoben,47.39,15.09,66176,1099.68,Bezirk,5
-# Missing record
-# 612,Liezen,47.57,14.24,81663,3270.77,Bezirk,5
-613,Mürzzuschlag,47.61,15.67,41945,848.86,Bezirk,5
-# Invalid value
-614,Murau,47.11,14.17,A,1384.58,Bezirk,5
-615,Radkersburg,46.75,15.85,23575,336.96,Bezirk,5
-616,Voitsberg,47.05,15.15,53250,678.6,Bezirk,5
-617,Weiz,47.22,15.62,86755,1070.48,Bezirk,5
-# Invalid value
-620,Murtal,47.17,14.66,-,1675.49,Bezirk,5
-621,Bruck-Mürzzuschlag,47.42,15.27,102707,2154.8,Bezirk,5
-622,Hartberg-Fürstenfeld,47.33,15.93,89527,1223.03,Bezirk,5
-623,Südoststeiermark,46.96,15.88,91130,,Bezirk,5
-701,Innsbruck-Stadt,47.27,11.4,115498,104.91,Bezirk,5
-702,Imst,47.08,10.87,54652,1724.82,Bezirk,5
-703,Innsbruck-Land,47.2,11.33,159835,1990.09,Bezirk,5
-704,Kitzbühel,47.43,12.38,60804,1163.28,Bezirk,5
-705,Kufstein,47.5,12.03,97089,969.9,Bezirk,5
-706,Landeck,47.07,10.47,44578,1594.82,Bezirk,5
-707,Lienz,46.9,12.5,50472,2019.87,Bezirk,5
-708,Reutte,47.21,10.76,31942,1236.82,Bezirk,5
-709,Schwaz,47.27,11.77,76913,1843.2,Bezirk,5
-801,Bludenz,47.1,9.87,61959,1287.52,Bezirk,5
-802,Bregenz,47.45,9.92,123902,863.34,Bezirk,5
-803,Dornbirn,47.42,9.73,78499,172.37,Bezirk,5
-804,Feldkirch,47.37,9.67,96467,278.26,Bezirk,5
-900,Wien,48.25,16.42,1714142,414.87,Gemeinde,6
-
+code,name,lat,lon,population,area,pop_density,type,level
+1,Burgenland,47.5,16.42,287416,3965.46,72.48,Bundesland,3
+2,Kärnten,46.75,13.83,555881,9535.97,58.29,Bundesland,3
+3,Niederösterreich,48.33,15.75,1625485,19177.78,84.76,Bundesland,3
+4,Oberösterreich,48.25,14,1425422,11981.74,118.97,Bundesland,3
+5,Salzburg,47.42,13.25,534270,7154.23,74.68,Bundesland,3
+6,Steiermark,47.25,15.17,1215246,16400.75,74.10,Bundesland,3
+7,Tirol,47.25,11.33,722038,12647.71,57.09,Bundesland,3
+8,Vorarlberg,47.25,9.92,375282,2601.48,144.26,Bundesland,3
+9,Wien,48.25,16.42,1714142,414.87,4131.76,Bundesland,3
+101,Eisenstadt,47.85,16.52,12061,42.91,281.08,Bezirk,5
+102,Rust,47.8,16.68,1799,20.01,89.91,Bezirk,5
+103,Eisenstadt-Umgebung,47.83,16.58,39265,453.14,86.65,Bezirk,5
+104,Güssing,47.06,16.32,26604,485.44,54.80,Bezirk,5
+105,Jennersdorf,46.94,16.14,17752,253.35,70.07,Bezirk,5
+106,Mattersburg,47.73,16.43,37902,237.84,159.36,Bezirk,5
+107,Neusiedl am See,47.85,17,52169,1038.65,50.23,Bezirk,5
+108,Oberpullendorf,47.5,16.52,37505,701.49,53.46,Bezirk,5
+109,Oberwart,47.29,16.2,53158,732.62,72.56,Bezirk,5
+201,Klagenfurt,46.62,14.31,91723,120.11,763.66,Bezirk,5
+202,Villach,46.61,13.86,57829,134.89,428.71,Bezirk,5
+203,Hermagor,46.6,13.13,19472,808.02,24.10,Bezirk,5
+204,Klagenfurt Land,46.63,14.2,57262,765.59,74.79,Bezirk,5
+205,Sankt Veit an der Glan,46.77,14.36,57934,1493.49,38.79,Bezirk,5
+206,Spittal an der Drau,46.85,13.33,81172,2764.52,29.36,Bezirk,5
+207,Villach Land,46.67,13.83,64621,1009.37,64.02,Bezirk,5
+208,Völkermarkt,46.55,14.67,43354,907.49,47.77,Bezirk,5
+209,Wolfsberg,46.83,14.83,55989,973.79,57.50,Bezirk,5
+210,Feldkirchen,46.72,14.1,30535,558.56,54.67,Bezirk,5
+301,Krems an der Donau,48.4,15.58,23734,51.61,459.87,Bezirk,5
+302,Sankt Pölten,48.2,15.62,50474,108.48,465.28,Bezirk,5
+303,Waidhofen an der Ybbs,47.97,14.77,11824,131.57,89.87,Bezirk,5
+304,Wiener Neustadt,47.8,16.25,39324,60.97,644.97,Bezirk,5
+305,Amstetten,48,14.77,110211,1187.79,92.79,Bezirk,5
+306,Baden,47.95,16.2,130670,753.38,173.45,Bezirk,5
+307,Bruck an der Leitha,48.05,16.7,41028,494.95,82.89,Bezirk,5
+308,Gänserndorf,48.34,16.72,67717,1271.21,53.27,Bezirk,5
+309,Gmünd,48.75,15.08,39261,786.24,49.94,Bezirk,5
+310,Hollabrunn,48.58,16.08,49987,1010.72,49.46,Bezirk,5
+311,Horn,48.75,15.7,32049,783.99,40.88,Bezirk,5
+312,Korneuburg,48.42,16.3,70651,626.5,112.77,Bezirk,5
+313,Krems-Land,48.5,15.5,54661,923.95,59.16,Bezirk,5
+314,Lilienfeld,47.92,15.6,27171,931.55,29.17,Bezirk,5
+315,Melk,48.17,15.27,75808,1013.62,74.79,Bezirk,5
+316,Mistelbach,48.58,16.5,73026,1291.51,56.54,Bezirk,5
+317,Mödling,48.07,16.25,109762,277.02,396.22,Bezirk,5
+318,Neunkirchen,47.65,16.03,86408,1146.36,75.38,Bezirk,5
+319,Sankt Pölten-Land,48.2,15.7,94841,1121.61,84.56,Bezirk,5
+320,Scheibbs,47.9,15.15,41382,1023.51,40.43,Bezirk,5
+321,Tulln,48.3,16,66141,658.03,100.51,Bezirk,5
+322,Waidhofen an der Thaya,48.83,15.4,27629,669.14,41.29,Bezirk,5
+323,Wiener Neustadt Land,47.8,16.25,72831,969.72,75.11,Bezirk,5
+324,Wien-Umgebung,48.13,16.5,105476,484.47,217.71,Bezirk,5
+325,Zwettl,48.6,15.17,44921,1399.76,32.09,Bezirk,5
+401,Linz,48.3,14.3,187112,95.99,1949.29,Bezirk,5
+402,Steyr,47.9,14.47,39116,26.56,1472.74,Bezirk,5
+403,Wels,48.1,14,58146,45.92,1266.25,Bezirk,5
+404,Braunau am Inn,48.26,13.03,95970,1040.46,92.24,Bezirk,5
+405,Eferding,48.3,13.97,31081,259.73,119.67,Bezirk,5
+406,Freistadt,48.51,14.51,64517,993.86,64.92,Bezirk,5
+# Missing record,,,,,,,,
+# 407,Gmunden,47.75,13.75,100023,1432.74,69.81,Bezirk,5
+408,Grieskirchen,48.27,13.8,62448,578.99,107.86,Bezirk,5
+409,Kirchdorf an der Krems,47.8,14.23,55684,1239.79,44.91,Bezirk,5
+410,Linz-Land,48.17,14.3,132896,460.27,288.73,Bezirk,5
+411,Perg,48.27,14.77,65163,613.52,106.21,Bezirk,5
+412,Ried im Innkreis,48.23,13.47,58625,585.01,100.21,Bezirk,5
+413,Rohrbach,48.53,13.95,57563,827.94,69.53,Bezirk,5
+414,Schärding,48.43,13.6,57080,618.49,92.29,Bezirk,5
+415,Steyr-Land,47.9,14.47,58358,971.7,60.06,Bezirk,5
+416,Urfahr-Umgebung,48.4,14.28,79317,649.36,122.15,Bezirk,5
+# Missing record,,,,,,,,
+# 417,Vöcklabruck,47.92,13.55,128189,1084.26,118.23,Bezirk,5
+418,Wels-Land,48.13,13.93,64940,457.66,141.90,Bezirk,5
+501,Salzburg,47.78,13.17,141552,1004,140.99,Bezirk,5
+502,Hallein,47.6,13.3,55383,668.31,82.87,Bezirk,5
+# Empty ""population"" field",,,,,,,,
+503,Salzburg-Umgebung,47.78,13.17,,1004.36,,Bezirk,5
+# Empty ""population"" field",,,,,,,,
+504,Sankt Johann im Pongau,47.3,13.3,,1755.37,,Bezirk,5
+505,Tamsweg,47.15,13.7,21261,1019.68,20.85,Bezirk,5
+506,Zell am See,47.28,12.7,84888,2640.85,32.14,Bezirk,5
+601,Graz,47.07,15.44,240278,127.56,1883.65,Bezirk,5
+603,Deutschlandsberg,46.82,15.21,61391,863.49,71.10,Bezirk,5
+604,Feldbach,46.96,15.89,67556,727.25,92.89,Bezirk,5
+605,Fürstenfeld,47.05,16.08,23037,263.82,87.32,Bezirk,5
+606,Graz-Umgebung,47.13,15.4,136234,1100.89,123.75,Bezirk,5
+609,Knittelfeld,47.21,14.83,29525,578.09,51.07,Bezirk,5
+610,Leibnitz,46.78,15.54,76325,681.52,111.99,Bezirk,5
+611,Leoben,47.39,15.09,66176,1099.68,60.18,Bezirk,5
+# Missing record,,,,,,,,
+# 612,Liezen,47.57,14.24,81663,3270.77,24.97,Bezirk,5
+613,Mürzzuschlag,47.61,15.67,41945,848.86,49.41,Bezirk,5
+# Invalid value,,,,,,,,
+614,Murau,47.11,14.17,A,1384.58,A,Bezirk,5
+615,Radkersburg,46.75,15.85,23575,336.96,69.96,Bezirk,5
+616,Voitsberg,47.05,15.15,53250,678.6,78.47,Bezirk,5
+617,Weiz,47.22,15.62,86755,1070.48,81.04,Bezirk,5
+# Invalid value,,,,,,,,
+620,Murtal,47.17,14.66,-0,1675.49,0.00,Bezirk,5
+621,Bruck-Mürzzuschlag,47.42,15.27,102707,2154.8,47.66,Bezirk,5
+622,Hartberg-Fürstenfeld,47.33,15.93,89527,1223.03,73.20,Bezirk,5
+623,Südoststeiermark,46.96,15.88,91130,1009,90.32,Bezirk,5
+701,Innsbruck-Stadt,47.27,11.4,115498,104.91,1100.92,Bezirk,5
+702,Imst,47.08,10.87,54652,1724.82,31.69,Bezirk,5
+703,Innsbruck-Land,47.2,11.33,159835,1990.09,80.32,Bezirk,5
+704,Kitzbühel,47.43,12.38,60804,1163.28,52.27,Bezirk,5
+705,Kufstein,47.5,12.03,97089,969.9,100.10,Bezirk,5
+706,Landeck,47.07,10.47,44578,1594.82,27.95,Bezirk,5
+707,Lienz,46.9,12.5,50472,2019.87,24.99,Bezirk,5
+708,Reutte,47.21,10.76,31942,1236.82,25.83,Bezirk,5
+709,Schwaz,47.27,11.77,76913,1843.2,41.73,Bezirk,5
+801,Bludenz,47.1,9.87,61959,1287.52,48.12,Bezirk,5
+802,Bregenz,47.45,9.92,123902,863.34,143.51,Bezirk,5
+803,Dornbirn,47.42,9.73,78499,172.37,455.41,Bezirk,5
+804,Feldkirch,47.37,9.67,96467,278.26,346.68,Bezirk,5
+900,Wien,48.25,16.42,1714142,414.87,4131.76,Gemeinde,6
