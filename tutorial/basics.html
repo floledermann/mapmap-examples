@@ -75,8 +75,6 @@ var map = mapmap(mapEl())
 </section>
 
 
-
-
 <h2>Data & Metadata</h2>
 
 
@@ -93,8 +91,8 @@ var map = mapmap(mapEl())
 var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso') //!'iso'
     .data('../data/places-AT.csv', 'code')       //!
-    .choropleth('population')                    //!
-    .hoverInfo(['name','population'])            //!
+    .choropleth('pop_density')                    //!
+    .hoverInfo(['name','pop_density'])            //!
 ;
 </script>
 </div>
@@ -116,16 +114,26 @@ var map = mapmap(mapEl())
     .data('../data/places-AT.csv', 'code')
     .meta({                                             //!
         'population': {                                 //!
-            label: "District Population",               //!
-            numberFormat: '0,000',                      //!
+            label: "Population",                        //!
+            numberFormat: '0,000'                       //!
+        },                                              //!
+        'area': {                                       //!
+            label: "Area",                              //!
+            numberFormat: '.0f',                          //!
+            valueUnit: "km²",                           //!
+        },                                              //!
+        'pop_density': {                                //!
+            label: "Population Density",                //!
+            numberFormat: '.0f',                       //!
+            valueUnit: "Pers./km²",                     //!
             scale: 'threshold',                         //!
-            domain: [20000,40000,80000,150000,500000],  //!
+            domain: [50,100,500,1000,2000],             //!
             color: colorbrewer.YlOrRd[6]                //!
         }                                               //!
     })                                                  //!
-    .choropleth('population')    
+    .choropleth('pop_density')    
     .legend(mapmap.legend.html())                       //!
-    .hoverInfo(['name','population'])
+    .hoverInfo(['name','population','area','pop_density'])
 ;
 </script>
 </div>
@@ -155,19 +163,20 @@ var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT.csv', 'code')
     .meta({
-        'population':  {
-            label: "District Population",
-            valueLabel: "Population",
-            domain: [0,200000],
-            color: colorbrewer.YlOrRd[5],
-            numberFormat:'0,000'
-        }
+        'pop_density': {                               
+            label: "Population Density",               
+            numberFormat: '.0f',                       
+            valueUnit: "Pers./km²",                     
+            scale: 'threshold',                         
+            domain: [50,100,500,1000,2000],            
+            color: colorbrewer.YlOrRd[6]               
+        }                                             
     })
     .select(isSalzburg)                          //!
     .extent()                                    //!
     .highlight()                                 //!
-    .choropleth('population')
-    .hoverInfo(['name','population'])
+    .choropleth('pop_density')
+    .hoverInfo(['name','pop_density'])
     .legend(mapmap.legend.html())
 ;
 </script>
@@ -196,23 +205,23 @@ var map = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT.csv', 'code')
     .meta({
-        'population':  {
-            label: "District Population",
-            domain: [0,200000],
-            color: colorbrewer.YlOrRd[5],
-            numberFormat:'0,000'
-        }
+        'pop_density': {                               
+            label: "Population Density",               
+            numberFormat: '.0f',                       
+            valueUnit: "Pers./km²",                     
+            scale: 'threshold',                         
+            domain: [50,100,500,1000,2000],            
+            color: colorbrewer.YlOrRd[6]               
+        }                                             
     })
-    .choropleth('population')
-    .hoverInfo(['name','population'])
+    .choropleth('pop_density')
+    .hoverInfo(['name','pop_density'])
     .applyBehavior(mapmap.behavior.zoom()) //!
 ;
 </script>
 </div>
 </section>
 
-
-<h2>Extending mapmap.js</h2>
 
 <section>
 <small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>

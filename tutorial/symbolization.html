@@ -43,19 +43,30 @@ var map = mapmap(mapEl())
     .meta({
         population: {
             label: "District Population",
-            domain: [0,500000],
-            scale: 'linear',
-            'stroke-width': [0.1,4.0]
+            numberFormat: '.0f',
+            domain: [100000,200000,500000],
+            scale: 'threshold',
+            stroke: ['#eeeeee','#aaaaaa','#666666','#333333'],
+            'stroke-dasharray': ['none'],
+            undefinedValues: {
+                stroke: '#aa3333',
+                'stroke-dasharray': '5 5'
+            }
         }
     })
     .select('districts')
-    .symbolizeAttribute('population','stroke-width')
+    .attr('stroke-width',2)
+    .symbolizeAttribute('population','stroke')
+    .symbolizeAttribute('population','stroke-dasharray')
+    .zOrder('population')
+    .legend(mapmap.legend.html())
+    .hoverInfo(['name','population'])
 ;
 </script>
 </div>
 </section>
 
-
+<!--
 <section class="map-example">
 <pre class="code auto"></pre>
 
@@ -92,11 +103,12 @@ var map = mapmap(mapEl())
                 stroke: 'black'
             });
     })
+    .legend(mapmap.legend.html())                      
 ;
 </script>
 </div>
 </section>
-
+-->
 
 <small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
 
