@@ -140,6 +140,40 @@ var map = mapmap(mapEl())
 </section>
 
 
+<h2>Calculating property values</h2>
+
+<section class="map-example">
+<pre class="code auto"></pre>
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<script>
+var map2 = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT_incomplete.csv', 'code')
+    // calculate field from existing data
+    .data(function(d) {
+        d.population_density = d.population / d.area;
+    })
+    .meta({
+        'population_density': {
+            label: "Population Density",
+            scale: 'threshold',
+            domain: [50,100,500,1000],
+            numberFormat: ',.0f',
+            undefinedColor: '#dddddd'
+        },
+    })
+    .select('districts')
+    .legend(mapmap.legend.html())
+    .choropleth('population_density');
+;
+
+</script>
+</div>
+</section>
+
 
 <h2>Selections</h2>
 
@@ -183,44 +217,6 @@ var map = mapmap(mapEl())
 </div>
 </section>
 
-
-
-<h2>Interaction</h2>
-
-
-
-<section class="map-example">
-
-<pre class="code">
-</pre>
-
-<div class="map-wrapper">
-<div class="mapLegend empty">
-<h3>Click to zoom in!</h3>
-</div>
-<svg width="800" height="400"></svg>
-
-<script>
-var map = mapmap(mapEl())
-    .geometry('../data/austria.topojson', 'iso')
-    .data('../data/places-AT.csv', 'code')
-    .meta({
-        'pop_density': {                               
-            label: "Population Density",               
-            numberFormat: '.0f',                       
-            valueUnit: "Pers./km²",                     
-            scale: 'threshold',                         
-            domain: [50,100,500,1000,2000],            
-            color: colorbrewer.YlOrRd[6]               
-        }                                             
-    })
-    .choropleth('pop_density')
-    .hoverInfo(['name','pop_density'])
-    .applyBehavior(mapmap.behavior.zoom()) //!
-;
-</script>
-</div>
-</section>
 
 
 <section>
