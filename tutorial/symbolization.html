@@ -49,7 +49,7 @@ var map = mapmap(mapEl())
             stroke: ['#eeeeee','#aaaaaa','#666666','#333333'],
             'stroke-dasharray': ['none'],
             undefinedValues: {
-                stroke: '#aa3333',
+                stroke: '#ff3333',
                 'stroke-dasharray': '5 5'
             }
         }
@@ -57,7 +57,7 @@ var map = mapmap(mapEl())
     .select('districts')
     .attr('stroke-width',2)
     .symbolizeAttribute('population','stroke')
-    .symbolizeAttribute('population','stroke-dasharray')
+    .symbolizeAttribute('population','stroke-dasharray', {legend: false})
     .zOrder('population')
     .legend(mapmap.legend.html())
     .hoverInfo(['name','population'])
