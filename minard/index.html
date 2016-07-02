@@ -5,9 +5,10 @@
 <style type="text/css">
 html {
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 body {
+    position: relative;
     font-family: sans-serif;
     font-size: 0.8em;
 }
@@ -42,7 +43,7 @@ svg line.anchor {
 <body>
 
 <svg id="mapEl" width="800" height="400"></svg>
-<svg id="chartEl" width="800" height="200" viewBox="0 0 800 200" preserveAspectRatio="xMidYMin slice"></svg>
+<svg id="chartEl" width="800" viewBox="0 0 800 200" preserveAspectRatio="xMidYMin slice"></svg>
 <small>Map data taken from <a href="http://benschmidt.org/D3-trail/minard.html">Ben Schmidt</a></small>
 
 <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
@@ -60,11 +61,26 @@ var map = mapmap('#mapEl')
     })
     .meta({
         'size': {
-            numberFormat: ',.0d'
+            label: "Troop Size",
+            numberFormat: ',.0d',
+            domain: [0,1000000],
+            scale: 'linear',
+            'stroke-width': [0, 100],
+            undefinedLabel: null
+        },
+        'dir': {
+            scale: 'ordinal',
+            domain: [-1,1],
+            'stroke': ['#000000', '#e5cbab'],
+            undefinedValues: {
+                'stroke': '#000000'
+            }
         }
     })
     .hoverInfo('size')
-    .symbolize(lineWidth) // assign visual attributes (svg attributes) / TODO: possibly depending on viewing context (e.g. highlight)
+    .attr('stroke-linecap', 'round')
+    .symbolizeAttribute('size', 'stroke-width')
+    .symbolizeAttribute('dir', 'stroke')
     // The anchorFunction "projects" any data to a point on the map
     .anchorFunction(lonAnchors)
     // layer 2: CITIES
@@ -76,28 +92,17 @@ var map = mapmap('#mapEl')
 
 createChart('chartEl', napoleon.temp, map);
 
+
+
 function lonAnchors(obj) {
-    if (obj.lon) {
-        for (var i=napoleon.army.length - 1; i>=0; i--) {
-            var place = napoleon.army[i];
-            if (place.lon == obj.lon) {
-                return this.project([place.lon, place.lat]);
-            }
+    // search data for given longitude, starting from end of journey
+    for (var i=napoleon.army.length - 1; i>=0; i--) {
+        var place = napoleon.army[i];
+        if (place.lon == obj.lon) {
+            return this.project([place.lon, place.lat]);
         }
     }
     return null;
-}
-
-function lineWidth(el, geom) {
-    if (geom.properties.size) {
-        el.attr({
-            'stroke-width': geom.properties.size / 10000,
-            'stroke-linecap': 'round'
-        });
-    }
-    if (geom.properties.group) {
-        el.attr('stroke', geom.properties.dir == 1 ? '#e5cbab' : '#000000');
-    }
 }
 
 function createChart(el, data, map) {
