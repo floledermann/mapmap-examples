@@ -66,7 +66,7 @@ var map = mapmap(mapEl())
 </div>
 </section>
 
-<!--
+
 <section class="map-example">
 <pre class="code auto"></pre>
 
@@ -80,9 +80,8 @@ var map = mapmap(mapEl())
     .meta({
         population: {
             label: "District Population",
-            domain: [0,500000],
-            scale: 'linear',
-            'stroke-width': [0.1,4.0]
+            domain: [0,2000000],
+            radius: [0,50]
         }
     })
     .select('districts')
@@ -91,15 +90,16 @@ var map = mapmap(mapEl())
         // and also the scale from metadata
         var pathGenerator = d3.geo.path().projection(this.projection());
         var centroid = pathGenerator.centroid(geometry);
-        // TODO: this should be derived from metadata
-        var radiusScale = d3.scale.sqrt().domain([0,2000000]).range([0,100]);
+        
+        var metadata = this.getMetadata('population');
+        var radiusScale = d3.scale.sqrt().domain(metadata.domain).range(metadata.radius);
         
         this._elements.overlay.append('circle')
             .attr({
                 r: radiusScale(data.population),
                 cx: centroid[0],
                 cy: centroid[1],
-                fill: 'none',
+                fill: 'rgba(0,0,0,0.1)',
                 stroke: 'black'
             });
     })
@@ -108,7 +108,7 @@ var map = mapmap(mapEl())
 </script>
 </div>
 </section>
--->
+
 
 <small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
 
