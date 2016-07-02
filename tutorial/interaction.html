@@ -3,167 +3,72 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/examples.css">
+
 <style type="text/css">
-html {
-    margin: 0;
-    padding: 0;
-}
-body {
-    width: auto;
-    height: auto;
-    font-family: sans-serif;
-    font-size: 12px;
-    margin: 0;
-    padding: 10px;
-}
-h3 {
-    margin: 0 0 1em;
-}
-svg.mapmap {
-    width: 100%;
-    border: 1px solid #ccc;
-}
-
-.mapLegend {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 13px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    background-color: rgba(98%,98%,98%,0.9);
-}
-
-section {
-    clear: both;
-    margin-bottom: 100px;
-    max-width: 740px;
-    margin: 30px auto;
-}
-
-.map-example,
-.map-wrapper {
-    position: relative;
-}
-
 svg.mapmap .municipalities path {
     display: none;
-}
-
-pre {
-    padding: 10px;
-    background: #fafafa;
-    color: #444;
-    border: 1px solid #ccc;
-    overflow-x: auto;
-}
-pre.code {
-    font-weight: bold;
-}
-pre b {
-    color: #000;
-}
-
-.map-example pre {
-    margin: 0 auto;
-}
-
-.map-example .map-wrapper {
-    width: 100%;
-    max-width: 740px;
-    margin: 20px auto;
-}
-.controls {
-    margin: 20px auto;
-}
-.subh {
-    margin-top: -10px;
-    margin-bottom: 10px;
-}
-.mapLegend.empty h3 {
-    margin-bottom: 0;
-}
-
-.legendCell.undefined {
-    margin-top: 0.5em;
-}
-
-@media (max-width: 760px) {
-    .mapLegend {
-        position: static;
-    }
-    pre {
-        width: auto;
-        padding-bottom: 20px;
-    }
-    .map-example .map-wrapper {
-        margin: 10px auto;
-    }
-    section {
-        margin-bottom: 50px;
-    }
-    .mapLegend {
-        font-size: 9px;
-        padding: 5px;
-        border-bottom: none;
-    }
 }
 </style>
 </head>
 <body>
 
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+<script src="../lib/jquery-1.11.3.js"></script>
+<script src="../lib/d3.js" charset="utf-8"></script>
 <script src="../lib/promise-1.0.0.js" charset="utf-8"></script>
 <script src="../lib/topojson.js" charset="utf-8"></script>
 <script src="../lib/colorbrewer.js" charset="utf-8"></script>
 <script src="../lib/mapmap.js"></script>
-<script>
-function mapEl() {
-    var script = document.currentScript;
-    if (!script) {
-        var scripts = document.getElementsByTagName( 'script' );
-        script = scripts[ scripts.length - 1 ];
-    }
-    return script.parentNode.getElementsByTagName('svg')[0];
-}
-</script>
+<script src="../lib/examples.js"></script>
 
-<h1>Switching visualizations</h1>
+<main>
+
+<h1>Interaction</h1>
 <p class="subh">with <a href="https://github.com/floledermann/mapmap.js">mapmap.js</a></p>
 
+<h2>Switching visualizations</h2>
 
 <section class="map-example">
+
 <pre class="code auto"></pre>
 
+<pre class="html">
+&lt;div class="controls"&gt;
+&lt;button data-field="population_1990"&gt;Population 1990&lt;/button&gt;
+&lt;button data-field="population_2000"&gt;Population 2000&lt;/button&gt;
+&lt;/div&gt;
+</pre>
+
 <div class="controls">
-<button data-field="population">Pop 1</button>
-<button data-field="population2">Pop 2</button>
+<button data-field="population_1990">Population 1990</button>
+<button data-field="population_2000">Population 2000</button>
 </div>
 
 <div class="map-wrapper">
 <svg width="800" height="400"></svg>
 
 <script>
-var map = mapmap(mapEl())
+var map1 = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
     .data('../data/places-AT_incomplete.csv', 'code')
+    // add synthetic fields for purpose of demonstration
     .data(function(d) {
-        // add synthetic second field
-        d.population2 = d.population;
+        d.population_1990 = Math.round(d.population * 0.8);
+        d.population_2000 = d.population;
     })
     .meta({
-        'population*': {
-            label: "District Population",
+        'population_*': {
             scale: 'threshold',
             numberFormat: ',.0f',
             undefinedColor: '#dddddd'
         },
-        population: {
+        population_1990: {
+            label: "District Population (1990)",
             domain: [10000,25000,100000,1000000],
             colors: colorbrewer.YlGnBu[5],
         },
-        population2: {
+        population_2000: {
+            label: "District Population (2000)",
             domain: [25000,100000],
             colors: colorbrewer.Oranges[3]
         }
@@ -177,26 +82,57 @@ var map = mapmap(mapEl())
             width: '11em'
         }
     }))
-    .choropleth('population');
+    .choropleth('population_1990');
 ;
 
-$('button').click(function() {
-    map.choropleth($(this).attr('data-field'));
+$('.controls button').click(function() {
+    map1.choropleth($(this).attr('data-field'));
 });
 </script>
 </div>
 </section>
+
+<h2>Click-to-zoom</h2>
+
+<section class="map-example">
+
+<pre class="code">
+</pre>
+
+<div class="map-wrapper">
+<div class="mapLegend empty">
+<h3>Click to zoom in!</h3>
+</div>
+<svg width="800" height="400"></svg>
+
+<script>
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({
+        'pop_density': {                               
+            label: "Population Density",               
+            numberFormat: '.0f',                       
+            valueUnit: "Pers./km²",                     
+            scale: 'threshold',                         
+            domain: [50,100,500,1000,2000],            
+            color: colorbrewer.YlOrRd[6]               
+        }                                             
+    })
+    .choropleth('pop_density')
+    .hoverInfo(['name','pop_density'])
+    .applyBehavior(mapmap.behavior.zoom()) //!
+;
+</script>
+</div>
+</section>
+
 
 
 <section>
 <small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
 </section>
 
-<script>
-$('.map-wrapper script').each(function(){
-    var $el = $(this);
-    $el.parents('.map-example').find('pre.code.auto').html($el.html().trim().replace('mapEl()',"'#mapElement'"));
-});
-</script>
+</main>
 
 </body>
