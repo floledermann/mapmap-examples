@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/examples.css">
+<link rel="stylesheet" href="leaflet.css">
+<style type="text/css">
+svg.mapmap .municipalities path {
+    display: none;
+}
+
+#leaflet {
+  width: 100%;
+  height: 400px;
+}
+</style>
+</head>
+<body>
+
+<script src="../lib/jquery-1.11.3.js"></script>
+<script src="../lib/d3.js" charset="utf-8"></script>
+<script src="../lib/promise-1.0.0.js" charset="utf-8"></script>
+<script src="../lib/topojson.js" charset="utf-8"></script>
+<script src="../lib/colorbrewer.js" charset="utf-8"></script>
+<script src="../lib/mapmap.js"></script>
+<script src="../lib/examples.js"></script>
+<script src="leaflet.js"></script>
+
+<main>
+
+<h1>Leaflet plugin</h1>
+<p class="subh">with <a href="https://github.com/floledermann/mapmap.js">mapmap.js</a></p>
+
+<p><a href="../">Up to examples</a></p>
+
+<h2>Adding mapmap.js to a leaflet map</h2>
+
+
+<section class="map-example">
+<pre class="code">
+</pre>
+
+<div class="map-wrapper">
+<div id="leaflet"></div>
+
+<script>
+var leafletMap = new L.Map("leaflet", {center: [47.5, 13.7], zoom: 7})
+    .addLayer(new L.TileLayer("http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"));
+    
+function leafletConnector(leafletMap) {
+    var connector = {};
+
+    var svg = d3.select(leafletMap.getPanes().overlayPane).append("svg"),
+    g = svg.append("g").attr("class", "leaflet-zoom-hide");  
+
+    var transform = d3.geo.transform({
+        point: function(x, y) {
+            var point = leafletMap.latLngToLayerPoint(new L.LatLng(y, x));
+            this.stream.point(point.x, point.y);
+        }
+    });
+    transform.scale = function() {return transform;};
+    transform.translate = function() {return transform;};
+    transform.invert = function(point) {
+        var latlng = leafletMap.layerPointToLatLng(new L.Point(point[0], point[1]));
+        return [latlng[0], latlng[1]];
+    };
+    
+    //var path = d3.geo.path().projection(transform);
+    leafletMap.on("viewreset", reset);
+    //reset();
+
+    // Reposition the SVG to cover the features.
+    function reset() {
+        var bounds = map.getPathGenerator().bounds(collection),
+            topLeft = bounds[0],
+            bottomRight = bounds[1];
+
+        svg.attr("width", bottomRight[0] - topLeft[0])
+            .attr("height", bottomRight[1] - topLeft[1])
+            .style("left", topLeft[0] + "px")
+            .style("top", topLeft[1] + "px");
+
+        g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+
+        feature.attr("d", path);
+    }    
+    
+    connector.getProjection = function() {
+        return transform;
+    }
+
+    connector.getElement = function() {
+        return g.node();
+    }
+    
+    return connector;
+}
+
+var connector = leafletConnector(leafletMap);
+    
+var map = mapmap(connector.getElement())
+    .projection(connector.getProjection())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({                                             
+        'pop_density': {                                
+            label: "Population Density",               
+            numberFormat: '.0f',                      
+            valueUnit: "Pers./km²",                     
+            scale: 'threshold',                        
+            domain: [50,100,500,1000,2000],           
+            color: colorbrewer.YlOrRd[6]                
+        }                                             
+    })                                                 
+    .choropleth('pop_density')    
+    .legend(mapmap.legend.html())                       
+    .hoverInfo(['name','population','area','pop_density'])
+;
+</script>
+</div>
+</section>
+
+
+<section>
+<small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
+</section>
+
+</main>
+</body>
