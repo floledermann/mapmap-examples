@@ -2,12 +2,14 @@
 
 ***Collection of examples for the [mapmap.js API](https://github.com/floledermann/mapmap.js)***
 
-## Running the examples
+The examples are [available online](https://floledermann.github.io/mapmap-examples/)!
+
+## Running the examples locally
 
 There is a minimal Python web server included that can be used to launch the examples. Run `serve.bat` on windows or 
 
 ```
-python -m SimpleHTTPServer 8089
+python server.py 8089
 ```
 
 on your platform and point your browser to [`http://localhost:8089`](http://localhost:8089)
