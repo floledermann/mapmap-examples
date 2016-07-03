@@ -86,21 +86,19 @@ var map = mapmap(mapEl())
     })
     .select('districts')
     .symbolize(function(element, geometry, data) {
-        // TODO: we need a setup function to initialize this stuff
-        // and also the scale from metadata
-        var pathGenerator = d3.geo.path().projection(this.projection());
-        var centroid = pathGenerator.centroid(geometry);
+    
+        var centroid = this.getPathGenerator().centroid(geometry);
         
         var metadata = this.getMetadata('population');
         var radiusScale = d3.scale.sqrt().domain(metadata.domain).range(metadata.radius);
         
-        this._elements.overlay.append('circle')
+        this.getOverlayPane().append('circle')
             .attr({
                 r: radiusScale(data.population),
                 cx: centroid[0],
                 cy: centroid[1],
                 fill: 'rgba(0,0,0,0.1)',
-                stroke: 'black'
+                stroke: '#000000'
             });
     })
     .legend(mapmap.legend.html())                      
