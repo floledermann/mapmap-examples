@@ -4,40 +4,20 @@
 <meta charset="utf-8">
 <style type="text/css">
 html {
-    width: 100%;
     min-height: 100%;
+    overflow-x: hidden;
 }
 body {
     position: relative;
     font-family: sans-serif;
     font-size: 0.8em;
 }
-#mapEl {
-    position: relative;
+svg {
     width: 100%;
-    height: 300px;
+}
+#mapEl {
     border-bottom: 2px solid #999;
 }
-#mapEl .layer-2 path {
-    fill: #666;
-    fill-opacity: 0.1;
-}
-#chartEl {
-    position: relative;
-    width: 100%;
-}
-#chartEl path {
-    fill: none;
-    stroke: #333;
-    stroke-width: 0.8;
-}
-svg line.anchor {
-    fill: none;
-    stroke: #333;
-    stroke-width: 0.3;
-}
-
-
 </style>
 </head>
 <body>
@@ -46,10 +26,9 @@ svg line.anchor {
 <svg id="chartEl" width="800" viewBox="0 0 800 200" preserveAspectRatio="xMidYMin slice"></svg>
 <small>Map data taken from <a href="http://benschmidt.org/D3-trail/minard.html">Ben Schmidt</a></small>
 
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script src="http://d3js.org/d3.v3.js"></script>
-<script src="data.js"></script>
+<script src="../lib/d3.js"></script>
 <script src="../lib/mapmap.js"></script>
+<script src="data.js"></script>
 <script>
 var dd = mapmap.datadata;
 
@@ -77,12 +56,11 @@ var map = mapmap('#mapEl')
             }
         }
     })
-    .hoverInfo('size')
     .attr('stroke-linecap', 'round')
     .symbolizeAttribute('size', 'stroke-width')
     .symbolizeAttribute('dir', 'stroke')
-    // The anchorFunction "projects" any data to a point on the map
-    .anchorFunction(lonAnchors)
+    .zOrder('dir')
+    .hoverInfo('size')
     // layer 2: CITIES
     .geometry(napoleon.cities, {
         map: dd.map.geo.point('lat','lon')
@@ -91,6 +69,8 @@ var map = mapmap('#mapEl')
         dx: 7,
         'text-anchor': 'left'
     }))
+    // The anchorFunction "projects" any data to a point on the map
+    .anchorFunction(lonAnchors)
 ;
 
 createChart('chartEl', napoleon.temp, map);
@@ -132,7 +112,12 @@ function createChart(el, data, map) {
     
     el.append('path')
         .datum(data)
-        .attr('class', 'temp')
+        .attr({
+            'class': 'temp',
+            fill: 'none',
+            stroke: '#333',
+            'stroke-width': '0.8'
+        })
         .attr('d', path);
     
     el.selectAll('line.anchor')
@@ -144,10 +129,13 @@ function createChart(el, data, map) {
             x1:function(d){return map.anchor(d)[0]},
             y1:function(d){ return y(d.temp); },
             x2:function(d){return map.anchor(d)[0]},
-            y2:0
+            y2:0,
+            xfill: 'none',
+            stroke: '#333',
+            'stroke-width': '0.3'
         });
-    
-    d3.select('#mapEl g.fixed')
+        
+    map.getFixedPane()
         .selectAll('line.anchor')
         .data(data)
         .enter()
@@ -157,7 +145,10 @@ function createChart(el, data, map) {
             x1:function(d){return map.anchor(d)[0]},
             y1:function(d){ return map.anchor(d)[1]; },
             x2:function(d){return map.anchor(d)[0]},
-            y2:400
+            y2:400,
+            xfill: 'none',
+            stroke: '#333',
+            'stroke-width': '0.3'
         });    
 }
 
