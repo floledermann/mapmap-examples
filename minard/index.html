@@ -87,7 +87,10 @@ var map = mapmap('#mapEl')
     .geometry(napoleon.cities, {
         map: dd.map.geo.point('lat','lon')
     })
-    .symbolize(mapmap.symbolize.addLabel('name'))
+    .symbolize(mapmap.symbolize.addLabel('name', {
+        dx: 7,
+        'text-anchor': 'left'
+    }))
 ;
 
 createChart('chartEl', napoleon.temp, map);
