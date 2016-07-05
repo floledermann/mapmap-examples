@@ -46,8 +46,8 @@ svg.mapmap .municipalities path {
 </pre>
 
 <div class="controls">
-<button data-field="population_1990">Population 1990</button>
-<button data-field="population_2000">Population 2000</button>
+<button data-field="pop_density">Population Density</button>
+<button data-field="population">Population Count</button>
 </div>
 
 <div class="map-wrapper">
@@ -56,28 +56,23 @@ svg.mapmap .municipalities path {
 <script>
 var map1 = mapmap(mapEl())
     .geometry('../data/austria.topojson', 'iso')
-    .data('../data/places-AT_incomplete.csv', 'code')
-    // add synthetic fields for purpose of demonstration
-    .data(function(d) {
-        d.population_1990 = Math.round(d.population * 0.8);
-        d.population_2000 = d.population;
-    })
+    .data('../data/places-AT.csv', 'code')
     .meta({
-        'population_*': {
-            scale: 'threshold',
+        '*': {
             numberFormat: ',.0f',
-            undefinedColor: '#dddddd'
+            scale: 'threshold'
         },
-        population_1990: {
-            label: "District Population (1990)",
+        'population': {
+            label: "District Population",
             domain: [10000,25000,100000,1000000],
-            colors: colorbrewer.YlGnBu[5],
+            colors: colorbrewer.YlGnBu[5]
         },
-        population_2000: {
-            label: "District Population (2000)",
-            domain: [25000,100000],
-            colors: colorbrewer.Oranges[3]
-        }
+        pop_density: {
+            label: "Population Density",               
+            valueUnit: "Pers./km²",                     
+            domain: [50,100,500,1000,2000],            
+            color: colorbrewer.YlOrRd[6]               
+        }                                             
     })
     .select('districts')
     .legend(mapmap.legend.html({
@@ -88,7 +83,7 @@ var map1 = mapmap(mapEl())
             width: '11em'
         }
     }))
-    .choropleth('population_1990');
+    .choropleth('pop_density');
 ;
 
 $('.controls button').click(function() {
