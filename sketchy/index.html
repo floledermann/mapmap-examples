@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="../css/examples.css">
+<style type="text/css">
+svg.mapmap .municipalities path,
+svg.mapmap .counties path {
+    display: none;
+}
+.hoverInfo {
+    display: none;
+    width: 200px;
+    margin-left: -110px;
+    border: 1px solid #bbbbbb;
+}
+</style>
+</head>
+<body>
+
+<script src="../lib/jquery-1.11.3.js"></script>
+<script src="../lib/d3.js" charset="utf-8"></script>
+<script src="../lib/promise-1.0.0.js" charset="utf-8"></script>
+<script src="../lib/topojson.js" charset="utf-8"></script>
+<script src="../lib/colorbrewer.js" charset="utf-8"></script>
+<script src="../lib/mapmap.js"></script>
+<script src="../lib/examples.js"></script>
+
+<main>
+
+<h1>Sketchy symbolization</h1>
+<p class="subh">with <a href="https://github.com/floledermann/mapmap.js">mapmap.js</a></p>
+
+<p><a href="../">Up to examples</a></p>
+
+<h2>Sketchy Outlines</h2>
+
+<section class="map-example">
+
+<div class="map-wrapper">
+<svg width="800" height="400"></svg>
+
+<pre class="code auto"></pre>
+
+<script>
+var map = mapmap(mapEl())
+    .geometry('../data/austria.topojson', 'iso')
+    .data('../data/places-AT.csv', 'code')
+    .meta({                                            
+        'pop_density': {                              
+            label: "Population Density",              
+            numberFormat: '.0f',                   
+            valueUnit: "Pers./km²"               
+        }                                             
+    })
+    .select('districts')
+    .symbolize(sketchySymbolizer({                          //!
+        passes: 3,                                          //!
+        sketchyness: 4,                                     //!
+        attributes: {                                       //!
+            'stroke-width': function(d) {                   //!
+                return d.properties.pop_density / 1000;     //!
+            }                                               //!
+        }                                                   //!
+    }))                                                     //!
+    .hoverInfo(['name','pop_density'], {
+        moveToFront: false
+    })
+;
+
+function sketchySymbolizer(options) { //!
+
+    // Options / defaults
+    var dd = mapmap.datadata;
+    
+    options.attributes = dd.merge({
+        'stroke-width': 0.5,
+        'stroke-linejoin': 'bevel',
+        stroke: '#000000',
+        fill: 'none'
+    }, options.attributes);
+        
+    options.originalAttributes = dd.merge({
+        stroke: 'none',
+        fill: '#ffffff',
+        'pointer-events': 'all'
+    }, options.originalAttributes);
+        
+    options = dd.merge({
+        passes: 3,
+        sketchyness: 4,
+    }, options);
+
+    // This is the actual symbolizer function, will be invoked for each entity
+    return function(el, geometry, data) {
+        el.attr(options.originalAttributes);
+        var path = el.attr('d');
+        var all = '';
+        for (var i=0; i<options.passes; i++) {
+            all += splitPath(path).map(function(d) {
+                if (+d === d) { // number?
+                    d += (Math.random() - 0.5) * options.sketchyness;
+                }
+                return d;
+            }).join('');
+        }
+        d3.select(el.node().parentNode).append('path')
+            .datum(el.datum())
+            .attr({
+                'stroke-width': el.attr('stroke-width')
+            })
+            .attr(options.attributes)
+            .attr('d', all);
+    };
+
+    // Helper function to split an SVG path attributes into its components
+    function splitPath(path) {
+
+        var split_path = [],
+            current = '';
+        
+        for (var i=0; i<path.length; i++) {
+            var c = path[i];
+            if (c.match(/[0-9\.]/)) {
+                current += c;
+            }
+            else {
+                if (!isNaN(parseFloat(current))) {
+                    current = parseFloat(current);
+                }
+                split_path.push(current);
+                split_path.push(c);
+                current = '';
+            }
+        }
+        if (current != '') split_path.push(current);
+        
+        return split_path;
+    }
+    
+}   //!
+
+</script>
+</div>
+</section>
+
+
+<section>
+<small>Map data &copy; <a href="http://www.openstreetmap.org">OpenStreetMap</a> &amp; Contributors, Statistical data from <a href="http://opengeodb.org/">OpenGeoDB</a></small>
+</section>
+
+</main>
+</body>
